@@ -53,6 +53,15 @@
   font-size: var(text-3xl);
 }
 
+/* text color */
+.text--black {
+  color: var(black-color);
+}
+
+.text--gray {
+  color: var(gray-color);
+}
+
 /*-----------------------------------------*\
   #SET FONT FAMILY
 \*-----------------------------------------*/
