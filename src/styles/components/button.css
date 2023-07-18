@@ -1,0 +1,15 @@
+.btn {
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+
+  cursor: pointer;
+}
+
+.btn--primary {
+  background-color: var(--primary-color);
+}
+
+.btn--secondary {
+  background-color: var(--secondary-color);
+}
