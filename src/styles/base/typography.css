@@ -1,0 +1,147 @@
+/*-----------------------------------------*\
+  #TEXT CLASSES
+\*-----------------------------------------*/
+
+/* text font family */
+.text {
+  font-family: var(primary-font);
+}
+
+.text--fantastic {
+  font-family: var(secondary-font);
+}
+
+/* text font weight */
+.text--normal {
+  font-weight: var(fw-normal);
+}
+
+.text--medium {
+  font-weight: var(fw-medium);
+}
+
+.text--semibold {
+  font-weight: var(fw-semibold);
+}
+
+.text--bold {
+  font-weight: var(fw-bold);
+}
+
+/* text font size */
+.text--xs {
+  font-size: var(text-xs);
+}
+
+.text--base {
+  font-size: var(text-base);
+}
+
+.text--lg {
+  font-size: var(text-lg);
+}
+
+.text--xl {
+  font-size: var(text-xl);
+}
+
+.text--2xl {
+  font-size: var(text-2xl);
+}
+
+.text--3xl {
+  font-size: var(text-3xl);
+}
+
+/* text color */
+.text--black {
+  color: var(black-color);
+}
+
+.text--gray {
+  color: var(gray-color);
+}
+
+/*-----------------------------------------*\
+  #SET FONT FAMILY
+\*-----------------------------------------*/
+
+/* Inter Black */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  src: url("path-to-fonts/Inter-Black.ttf") format("truetype");
+}
+
+/* Inter Bold */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  src: url("path-to-fonts/Inter-Bold.ttf") format("truetype");
+}
+
+/* Inter Extra Bold */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  src: url("path-to-fonts/Inter-ExtraBold.ttf") format("truetype");
+}
+
+/* Inter Extra Light */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 200;
+  src: url("path-to-fonts/Inter-ExtraLight.ttf") format("truetype");
+}
+
+/* Inter Light */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  src: url("path-to-fonts/Inter-Light.ttf") format("truetype");
+}
+
+/* Inter Medium */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  src: url("path-to-fonts/Inter-Medium.ttf") format("truetype");
+}
+
+/* Inter Regular */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("path-to-fonts/Inter-Regular.ttf") format("truetype");
+}
+
+/* Inter SemiBold */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  src: url("path-to-fonts/Inter-SemiBold.ttf") format("truetype");
+}
+
+/* Inter Thin */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100;
+  src: url("path-to-fonts/Inter-Thin.ttf") format("truetype");
+}
+
+/* Jua Regular */
+@font-face {
+  font-family: "Jua";
+  font-style: normal;
+  font-weight: 400;
+  src: url("path-to-fonts/Jua-Regular.ttf") format("truetype");
+}
