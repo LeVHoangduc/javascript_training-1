@@ -9,22 +9,79 @@
   </head>
   <body>
     <!-- Start Header -->
-    <header class="header flex">
-      <h1 class="text text--fantastic text--normal text--2xl">Address Book</h1>
-      <div class="features flex">
+    <header class="header">
+      <h1 class="text text--fantastic text--black text--normal text--2xl">Address Book</h1>
+      <div class="features">
         <div class="features__search">
           <span class="features__search__icon"></span>
           <input class="features__search__input text text--normal text--xs" type="text" placeholder="Search" />
         </div>
-        <button class="features__filter flex btn btn--secondary">
+        <button class="features__filter btn btn--secondary">
           <img src="assets/icons/filter-icon.svg" alt="filter-icon" />
         </button>
-        <button class="features__add flex btn btn--primary">
+        <button class="features__add btn btn--primary">
           <img src="assets/icons/plus-icon.svg" alt="add icon" />
-          <p class="text text--medium text--base">New contact</p>
+          <p class="text text--medium text--sm">New contact</p>
         </button>
       </div>
     </header>
     <!-- End Header -->
+    <div class="row">
+      <!-- Start contact list -->
+      <section class="contacts col-7">
+        <ul class="contacts__list">
+          <li class="contact-item row">
+            <div class="contact-item__avatar col-2">
+              <img src="assets/images/avatar-example.png" alt="avatar" />
+            </div>
+            <div class="contact-item__info col-3">
+              <p class="contact-item__info__name text text--black text--semibold text--xl">David John</p>
+              <p class="text text--gray text--sm text--medium">Friend</p>
+            </div>
+            <p class="contact-item__phone col-3 text text--black text--medium text-sm">0706312495</p>
+            <p class="text text--black col-4 text--semibold text--lg">johndavid@gmail.com</p>
+          </li>
+        </ul>
+      </section>
+      <!-- End contact list -->
+      <!-- Start contact information -->
+      <section class="info col-3">
+        <div class="info__head">
+          <div class="info__head__avatar">
+            <img src="assets/images/avatar-example.png" alt="avatar" />
+          </div>
+          <p class="text text--black text--normal text--lg">Maria Onichan</p>
+          <p class="text text--gray text--medium text--sm">Best Friend</p>
+        </div>
+        <div class="info__body">
+          <h2 class="info__body__title text text--fantastic text--normal text-sm">Contact</h2>
+          <div class="info__body__contact">
+            <div class="detail detail--phone">
+              <div class="detail__left">
+                <p class="text text--medium text--sm text--gray">Phone number</p>
+                <p class="text text--medium text--sm text--black">0902362954</p>
+              </div>
+              <div class="detail__right">
+                <img src="assets/icons/phone-icon.svg" alt="phone" />
+              </div>
+            </div>
+            <div class="detail detail--mail">
+              <div class="detail__left">
+                <p class="text text--medium text--sm text--gray">Email Address</p>
+                <p class="text text--medium text--sm text--black">onichan@gmail.com</p>
+              </div>
+              <div class="detail__right">
+                <img src="assets/icons/mail-icon.svg" alt="phone" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="info__buttons">
+          <button class="info__button__edit btn btn--primary text text--medium text--sm">Edit</button>
+          <button class="info__button__delete btn btn--secondary text text--medium text--sm">Delete</button>
+        </div>
+      </section>
+      <!-- End contact information -->
+    </div>
   </body>
 </html>

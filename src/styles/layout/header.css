@@ -3,15 +3,19 @@
 \*------------------------------------*/
 
 .header {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   align-items: center;
 
   padding: 55px 95px;
 
-  border-bottom: 1.5px rgba(154, 154, 154, 0.1) solid;
+  border-bottom: 1.5px rgba(154, 154, 154, 0.5) solid;
 }
 
 .features {
+  display: flex;
+  align-items: center;
   gap: 23px;
 }
 

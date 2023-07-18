@@ -33,7 +33,7 @@
   font-size: var(--text-xs);
 }
 
-.text--base {
+.text--sm {
   font-size: var(--text-base);
 }
 
