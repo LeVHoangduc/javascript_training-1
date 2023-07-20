@@ -44,7 +44,8 @@
 }
 
 .detail {
-  width: 328px;
+  width: 100%;
+  max-width: 328px;
   display: flex;
   justify-content: space-between;
 }
