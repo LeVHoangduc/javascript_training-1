@@ -16,6 +16,15 @@ class Service {
   }
 
   /**
+   * Get contact by Id from database
+   */
+  static async getContactById(id) {
+    const response = await fetch(`${API_GATEWAY_URL}/contacts/${id}`);
+    const data = response.json();
+    return data;
+  }
+
+  /**
    * Get relation list from database
    */
   static async getRelationList() {

@@ -7,6 +7,7 @@ class Contacts {
    */
   constructor() {
     this.contacts;
+    this.contact;
   }
 
   /**
@@ -26,10 +27,22 @@ class Contacts {
   }
 
   /**
-   * Get list of Contact objects
+   * Get Contact objects list
+   * @returns {array}
    */
   getContacts() {
     return this.contacts;
+  }
+
+  /**
+   * Get Contact object by Id
+   * @param {string} id 
+   * @returns {object}
+   */
+  async getContactById(id) {
+    const data = await Service.getContactById(id);
+    this.contact = new Contact(data)
+    return this.contact;
   }
 }
 

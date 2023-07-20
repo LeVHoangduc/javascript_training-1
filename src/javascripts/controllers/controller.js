@@ -19,9 +19,16 @@ class Controller {
 
   async initContacts() {
     await this.model.contactList.init();
-    const contacts = this.model.contactList.getContacts();
-    this.view.contact.renderContactList(contacts);
+    const contacts = await this.model.contactList.getContacts();
+    await this.view.contact.renderContactList(contacts);
+    this.view.contact.addDelegateShowInfo(this.showInfo);
   }
+
+  showInfo = async (contactId) => {
+    const contact = await this.model.contactList.getContactById(contactId);
+    this.view.contact.renderContactInfo(contact)
+  }
+
 }
 
 export default Controller;
