@@ -26,29 +26,28 @@ class Contacts {
     return data.map((item) => new Contact(item));
   }
 
-  /**
-   * Get Contact objects list
-   * @returns {array}
-   */
   getContacts() {
     return this.contacts;
   }
 
-  /**
-   * Get Contact object by Id
-   * @param {string} id 
-   * @returns {object}
-   */
   async getContactById(id) {
     const data = await Service.getContactById(id);
-    this.contact = new Contact(data)
-    return this.contact;
+    const contact = new Contact(data)
+    return contact;
   }
 
   async addContact(name, relation, phone, email, avatar) {
     const contact = new Contact({ name, relation, phone, email, avatar });
-    console.log(contact);
     await Service.addContact(contact);
+  }
+
+  async editContact(id, name, relation, phone, email, avatar) {
+    const contact = new Contact({ id, name, relation, phone, email, avatar });
+    await Service.editContact(contact);
+  }
+
+  async deleteContactById(id) {
+    await Service.deleteContactById(id);
   }
 }
 

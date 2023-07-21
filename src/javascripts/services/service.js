@@ -24,9 +24,11 @@ class Service {
     return data;
   }
 
+  /**
+   * Add contact to database
+   */
   static async addContact(contact) {
-    console.log("JSON:", JSON.stringify(contact));
-    const response = await fetch(`${API_GATEWAY_URL}/contacts`,
+    await fetch(`${API_GATEWAY_URL}/contacts`,
       {
         method: "POST",
         headers: {
@@ -34,8 +36,30 @@ class Service {
         },
         body: JSON.stringify(contact)
       })
-    const data = response.json();
-    return data;
+  }
+
+  /**
+   * Edit contact from database
+   */
+  static async editContact(contact) {
+    await fetch(`${API_GATEWAY_URL}/contacts/${contact.id}`,
+      {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contact)
+      })
+  }
+
+  /**
+   * Delete contact from database
+   */
+  static async deleteContactById(id) {
+    await fetch(`${API_GATEWAY_URL}/contacts/${id}`,
+      {
+        method: "DELETE",
+      })
   }
 
   /**

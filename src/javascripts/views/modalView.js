@@ -9,9 +9,17 @@ class ModalView {
     }
 
     //----- RENDERING -----//
-    renderModal() {
+    async renderModal(contactId, contact) {
         this.modalEl.classList.add("modal--active");
         this.overlayEl.classList.add("overlay--active");
+        if (contactId) {
+            this.modalEl.setAttribute("data-id", contactId);
+            this.modalEl.querySelector('input[name="name"]').value = contact.name;
+            this.modalEl.querySelector('select[name="relation"]').value = contact.relation;
+            this.modalEl.querySelector('input[name="phone"]').value = contact.phone;
+            this.modalEl.querySelector('input[name="avatar"]').value = contact.avatar;
+            this.modalEl.querySelector('input[name="email"]').value = contact.email;
+        };
     }
 
     //----- EVENT HANDLER -----//

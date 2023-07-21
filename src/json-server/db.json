@@ -1,12 +1,12 @@
 {
   "contacts": [
     {
-      "name": "Ruth Bruen DVM",
-      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/ava_2_ovtgx0.png",
-      "phone": "(787) 263-8604",
-      "email": "Cummings33@gmail.com",
-      "relation": "family",
-      "id": "1"
+      "id": "1",
+      "name": "Ngo Hong Hoang",
+      "relation": "colleague",
+      "phone": "0935487037",
+      "email": "honghoangngo@gmail.com",
+      "avatar": "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg"
     },
     {
       "name": "Joseph Kunde",
@@ -39,30 +39,6 @@
       "email": "Mario_Bosco77@gmail.com",
       "relation": "friend",
       "id": "5"
-    },
-    {
-      "name": "Ngo Hong Hoang",
-      "relation": "family",
-      "phone": "0935487037",
-      "email": "honghoangngo@gmail.com",
-      "avatar": "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-      "id": "wM7sM4U"
-    },
-    {
-      "name": "Ngo Hong Hoang",
-      "relation": "family",
-      "phone": "0935487037",
-      "email": "honghoangngo@gmail.com",
-      "avatar": "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-      "id": "14MZa4Q"
-    },
-    {
-      "name": "Ngo Hong Hoang",
-      "relation": "family",
-      "phone": "0935487037",
-      "email": "honghoangngo@gmail.com",
-      "avatar": "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-      "id": "1znR1mR"
     }
   ],
   "relations": [

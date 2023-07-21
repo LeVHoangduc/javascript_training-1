@@ -8,6 +8,7 @@ class ContactView {
         this.infoEl = document.querySelector(".info");
         this.contactEl = ".contact-item";
         this.addBtnEl = document.querySelector(".features__add");
+
     }
 
     //----- RENDERING -----//
@@ -22,28 +23,42 @@ class ContactView {
         this.contactListEl.innerHTML += contactTemplate;
     }
 
-    renderContactInfo(contact) {
+    renderContactInfo(contact, deleteContact, editContact) {
         const infoTemplate = Template.info(contact);
         this.infoEl.innerHTML = infoTemplate;
+        this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
+        this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
+        this.addEventDeleteContact(this.deleteBtnEl, deleteContact);
+        this.addEventEditContact(this.editBtnEl, editContact);
     }
 
     //----- EVENT HANDLER -----//
-    addDelegateShowInfo = (handler) => {
+    addDelegateShowInfo = (showInfo) => {
         this.contactListEl.addEventListener("click", (event) => {
             const el = event.target.closest(this.contactEl);
             const contactId = el.getAttribute("data-id");
-            handler(contactId);
+            showInfo(contactId);
         })
     }
 
-    addEventAddContact = (handler) => {
+    addEventAddContact = (addContact) => {
         this.addBtnEl.addEventListener("click", () => {
-            handler()
+            addContact()
         });
     }
 
-    addEventDeleteContact = (deleteContact) => {
+    addEventDeleteContact = (El, deleteContact) => {
+        El.addEventListener("click", (event) => {
+            const contactId = event.target.parentNode.getAttribute("data-id");
+            deleteContact(contactId);
+        })
+    }
 
+    addEventEditContact = (El, editContact) => {
+        El.addEventListener("click", (event) => {
+            const contactId = event.target.parentNode.getAttribute("data-id");
+            editContact(contactId);
+        })
     }
 }
 
