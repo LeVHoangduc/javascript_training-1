@@ -24,6 +24,20 @@ class Service {
     return data;
   }
 
+  static async addContact(contact) {
+    console.log("JSON:", JSON.stringify(contact));
+    const response = await fetch(`${API_GATEWAY_URL}/contacts`,
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contact)
+      })
+    const data = response.json();
+    return data;
+  }
+
   /**
    * Get relation list from database
    */

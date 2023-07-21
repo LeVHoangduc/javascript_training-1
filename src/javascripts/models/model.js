@@ -6,8 +6,8 @@ class Model {
    * Constructor of Model object
    */
   constructor() {
-    this.contactList = new Contacts();
-    this.relationsList = new Relations();
+    this.contact = new Contacts();
+    this.relation = new Relations();
   }
 }
 

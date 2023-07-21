@@ -29,7 +29,7 @@ class Relations {
    * Get list of Relation objects
    */
   getRelations() {
-    return this.contacts;
+    return this.relations;
   }
 }
 

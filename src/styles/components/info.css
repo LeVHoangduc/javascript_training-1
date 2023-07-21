@@ -14,6 +14,19 @@
   gap: 6px;
 }
 
+.info__head__avatar {
+  width: 72px;
+  height: 79px;
+
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.info__head__avatar > img {
+  width: 100%;
+  height: 100%;
+}
+
 .info__body {
   display: flex;
   flex-direction: column;

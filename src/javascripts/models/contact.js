@@ -7,7 +7,7 @@ class Contact {
     this.id = data.id;
     this.name = data.name;
     this.relation = data.relation;
-    this.phone = data.phone_number;
+    this.phone = data.phone;
     this.email = data.email;
     this.avatar = data.avatar;
   }

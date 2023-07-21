@@ -44,6 +44,12 @@ class Contacts {
     this.contact = new Contact(data)
     return this.contact;
   }
+
+  async addContact(name, relation, phone, email, avatar) {
+    const contact = new Contact({ name, relation, phone, email, avatar });
+    console.log(contact);
+    await Service.addContact(contact);
+  }
 }
 
 export default Contacts;

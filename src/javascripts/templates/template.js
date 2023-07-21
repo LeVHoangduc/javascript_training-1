@@ -58,6 +58,10 @@ class Template {
         <button class="info__button__delete btn btn--secondary text text--medium text--sm">Delete</button>
     </div>
     `;
+
+    static relation = (relation) => `
+    <option value="${relation.name}">${relation.name}</option>
+    `
 }
 
 export default Template

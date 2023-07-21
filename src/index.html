@@ -37,9 +37,53 @@
       <!-- End contact list -->
 
       <!-- Start contact information -->
-      <section class="info col-3"></section>
+      <section class="info col-3">
+        <!-- Place to put info template -->
+      </section>
       <!-- End contact information -->
-      <script type="module" src="./javascripts/main.js"></script>
     </div>
+    <!-- Start overlay -->
+    <div class="overlay"></div>
+    <!-- End overlay -->
+
+    <!-- Start modal -->
+    <form class="modal">
+      <div class="modal__top">
+        <h2 class="text text--black text--semibold text--3xl">Add contact</h2>
+        <button type="button" class="modal__top__btn">
+          <img src="assets/icons/cancel-icon.svg" alt="cancel" />
+        </button>
+      </div>
+      <div class="modal__inputs">
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Name *</p>
+          <input type="text" name="name" class="text text--normal text--lg" />
+        </div>
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Relation *</p>
+          <select name="relation" class="relation-list text text--normal text--lg">
+            <!-- Place to relation template -->
+          </select>
+        </div>
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Phone number *</p>
+          <input type="number" name="phone" class="text text--normal text--lg" />
+        </div>
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Image *</p>
+          <input type="url" name="avatar" class="text text--normal text--lg" />
+        </div>
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Email *</p>
+          <input type="email" name="email" class="text text--normal text--lg" />
+        </div>
+      </div>
+      <div class="modal__buttons">
+        <button type="submit" class="modal__buttons__submit btn btn--primary text text--white text--semibold text--xl">Submit</button>
+        <button class="modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">Cancel</button>
+      </div>
+    </form>
+    <!-- End modal -->
+    <script type="module" src="./javascripts/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,77 @@
+.modal {
+  display: none;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 80%;
+  max-width: 968px;
+  height: 95%;
+  max-height: 797px;
+  border-radius: 30px;
+
+  background-color: var(--bg-light-color);
+
+  padding: 52px;
+
+  scale: 0.8;
+}
+
+.modal--active {
+  display: block;
+}
+
+.modal__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal__top__btn {
+  background-color: inherit;
+  border: none;
+}
+
+.modal__inputs {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 55px;
+  row-gap: 45px;
+
+  margin: 67px 0 86px;
+}
+
+.modal__inputs__field {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.modal__inputs__field > input,
+select {
+  width: 100%;
+  max-width: 413px;
+  height: 62px;
+
+  border-radius: 5px;
+  border: 2px solid var(--secondary-color);
+
+  padding: 10px;
+}
+
+.relation-list {
+  text-transform: capitalize;
+}
+
+.modal__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+}
+
+.modal__buttons > button {
+  width: 40%;
+  max-width: 264px;
+  height: 62px;
+}

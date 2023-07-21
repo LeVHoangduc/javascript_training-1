@@ -66,6 +66,10 @@ p {
   color: var(--gray-color);
 }
 
+.text--white {
+  color: var(--bg-light-color);
+}
+
 /*-----------------------------------------*\
   #SET FONT FAMILY
 \*-----------------------------------------*/
