@@ -16,6 +16,8 @@
 .contact-item__avatar {
   width: 70px;
   height: 77px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .contact-item__avatar > img {

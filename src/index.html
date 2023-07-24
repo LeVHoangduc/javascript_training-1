@@ -16,9 +16,16 @@
           <span class="features__search__icon"></span>
           <input class="features__search__input text text--normal text--xs" type="text" placeholder="Search" />
         </div>
-        <button class="features__filter btn btn--secondary">
-          <img src="assets/icons/filter-icon.svg" alt="filter-icon" />
-        </button>
+        <div class="features__filter">
+          <button class="btn btn--secondary">
+            <img src="assets/icons/filter-icon.svg" alt="filter-icon" />
+          </button>
+          <form class="relation-dropdown">
+            <input type="radio" id="0" name="filter_option" value="All" checked />
+            <label class="relation-dropdown__li text text--gray text--normal text--lg" for="0">All</label>
+            <!-- Place to put relation dropdown -->
+          </form>
+        </div>
         <button class="features__add btn btn--primary">
           <img src="assets/icons/plus-icon.svg" alt="add icon" />
           <p class="text text--medium text--sm">New contact</p>
@@ -80,7 +87,7 @@
       </div>
       <div class="modal__buttons">
         <button type="submit" class="modal__buttons__submit btn btn--primary text text--white text--semibold text--xl">Submit</button>
-        <button class="modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">Cancel</button>
+        <button type="button" class="modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">Cancel</button>
       </div>
     </form>
     <!-- End modal -->

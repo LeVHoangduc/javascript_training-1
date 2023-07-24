@@ -21,10 +21,20 @@ class Controller {
   //----- CONTACT CONTROLLER -----//
   async initContacts() {
     await this.model.contact.init();
-    const contacts = await this.model.contact.getContacts();
-    await this.view.contact.renderContactList(contacts);
+    const contacts = this.model.contact.getContacts();
+    const contactInfo = this.model.contact.getContactInfo();
+    this.view.contact.renderContactList(contacts);
+    this.view.contact.renderContactInfo(contactInfo);
     this.view.contact.addEventAddContact(this.addContact);
     this.view.contact.addDelegateShowInfo(this.showInfo);
+    this.view.contact.addEventSearchContact(this.searchContact);
+    this.view.contact.addEventShowFilterOptions();
+    this.view.contact.addDelegateFilterContact(this.filterContact);
+  }
+
+  loadListContacts = () => {
+    const contacts = this.model.contact.getContacts();
+    this.view.contact.renderContactList(contacts);
   }
 
   saveContact = async (id, name, relation, phone, email, avatar) => {
@@ -33,19 +43,22 @@ class Controller {
     } else {
       await this.model.contact.editContact(id, name, relation, phone, email, avatar);
     }
+    this.loadListContacts();
   }
 
   showInfo = async (contactId) => {
-    const contact = await this.model.contact.getContactById(contactId);
-    this.view.contact.renderContactInfo(contact, this.deleteContact, this.editContact)
+    await this.model.contact.getContactById(contactId);
+    const contactInfo = this.model.contact.getContactInfo();
+    this.view.contact.renderContactInfo(contactInfo, this.deleteContact, this.editContact)
   }
 
   addContact = () => {
     this.view.modal.renderModal();
   }
 
-  deleteContact = (contactId) => {
-    this.model.contact.deleteContactById(contactId)
+  deleteContact = async (contactId) => {
+    await this.model.contact.deleteContactById(contactId);
+    this.loadListContacts();
   }
 
   editContact = async (contactId) => {
@@ -57,11 +70,22 @@ class Controller {
     this.model.contact.getContactById(id);
   }
 
+  searchContact = (searchKey) => {
+    const result = this.model.contact.searchContact(searchKey);
+    this.view.contact.renderContactList(result);
+  }
+
+  filterContact = (relation) => {
+    const result = this.model.contact.filterContact(relation);
+    this.view.contact.renderContactList(result);
+  }
+
   //----- RELATION CONTROLLER -----//
   async initRelations() {
     await this.model.relation.init();
     const relations = await this.model.relation.getRelations();
     this.view.relation.renderRelationList(relations);
+    this.view.relation.renderRelationDropdownList(relations);
   }
 
   //----- MODAL CONTROLLER -----//

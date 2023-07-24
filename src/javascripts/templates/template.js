@@ -62,6 +62,11 @@ class Template {
     static relation = (relation) => `
     <option value="${relation.name}">${relation.name}</option>
     `
+
+    static relationDropDown = (relation) => `  
+    <input type="radio" id="${relation.id}" name="filter_option" value="${relation.name}">     
+    <label class="relation-dropdown__li text text--gray text--normal text--lg" for="${relation.id}">${relation.name}</label>
+    `
 }
 
 export default Template

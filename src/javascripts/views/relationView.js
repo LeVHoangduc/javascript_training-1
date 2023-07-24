@@ -6,6 +6,7 @@ class RelationView {
      */
     constructor() {
         this.relationListEl = document.querySelector(".relation-list");
+        this.relationDropDownEl = document.querySelector(".relation-dropdown");
     }
 
     //----- RENDERING -----//
@@ -15,9 +16,20 @@ class RelationView {
         })
     }
 
+    renderRelationDropdownList(relations) {
+        relations.forEach(relation => {
+            this.renderRelationDropdown(relation);
+        })
+    }
+
     renderRelation(relation) {
         const relationTemplate = Template.relation(relation);
         this.relationListEl.innerHTML += relationTemplate;
+    }
+
+    renderRelationDropdown(relation) {
+        const relationDropDownTemplate = Template.relationDropDown(relation);
+        this.relationDropDownEl.innerHTML += relationDropDownTemplate;
     }
 }
 

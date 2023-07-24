@@ -8,11 +8,15 @@ class ContactView {
         this.infoEl = document.querySelector(".info");
         this.contactEl = ".contact-item";
         this.addBtnEl = document.querySelector(".features__add");
-
+        this.searchInputEl = document.querySelector(".features__search__input");
+        this.filterBtnEl = document.querySelector(".features__filter > button");
+        this.filterDropDown = document.querySelector(".relation-dropdown");
+        this.filterOptionEl = ".relation-dropdown__li";
     }
 
     //----- RENDERING -----//
     renderContactList(contacts) {
+        this.contactListEl.innerHTML = "";
         contacts.forEach(contact => {
             this.renderContact(contact);
         })
@@ -23,8 +27,8 @@ class ContactView {
         this.contactListEl.innerHTML += contactTemplate;
     }
 
-    renderContactInfo(contact, deleteContact, editContact) {
-        const infoTemplate = Template.info(contact);
+    renderContactInfo(contactInfo, deleteContact, editContact) {
+        const infoTemplate = Template.info(contactInfo);
         this.infoEl.innerHTML = infoTemplate;
         this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
         this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
@@ -58,6 +62,27 @@ class ContactView {
         El.addEventListener("click", (event) => {
             const contactId = event.target.parentNode.getAttribute("data-id");
             editContact(contactId);
+        })
+    }
+
+    addEventSearchContact = (searchContact) => {
+        this.searchInputEl.addEventListener("change", (event) => {
+            searchContact(event.target.value);
+        });
+    }
+
+    addEventShowFilterOptions = () => {
+        this.filterBtnEl.addEventListener("click", (event) => {
+            this.filterBtnEl.querySelector("img").classList.toggle("rot-90");
+            this.filterDropDown.classList.toggle("relation-dropdown--active")
+        });
+    }
+
+    addDelegateFilterContact = (filterContact) => {
+        this.filterDropDown.addEventListener("click", (event) => {
+            const el = event.target.closest(this.filterOptionEl);
+            const relation = el.innerText;
+            filterContact(relation);
         })
     }
 }

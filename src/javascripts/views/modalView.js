@@ -5,7 +5,7 @@ class ModalView {
     constructor() {
         this.modalEl = document.querySelector(".modal");
         this.overlayEl = document.querySelector(".overlay");
-        this.cancelBtnEl = document.querySelector(".modal__top__btn");
+        this.cancelBtnEl = document.querySelectorAll(".modal__top__btn,.modal__buttons__cancel");
     }
 
     //----- RENDERING -----//
@@ -24,10 +24,13 @@ class ModalView {
 
     //----- EVENT HANDLER -----//
     addEventCancelModal = () => {
-        this.cancelBtnEl.addEventListener("click", () => {
-            this.modalEl.classList.remove("modal--active");
-            this.overlayEl.classList.remove("overlay--active");
-        });
+        console.log(this.cancelBtnEl);
+        this.cancelBtnEl.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                this.modalEl.classList.remove("modal--active");
+                this.overlayEl.classList.remove("overlay--active");
+            });
+        })
     }
 
     addEventSubmission = (saveContact) => {
@@ -40,7 +43,14 @@ class ModalView {
             const email = this.modalEl.email.value;
             const avatar = this.modalEl.avatar.value;
             await saveContact(id, name, relation, phone, email, avatar);
+            this.modalEl.classList.remove("modal--active");
+            this.overlayEl.classList.remove("overlay--active");
         })
+    }
+
+    //----- VALIDATE FORM -----//
+    validateForm() {
+
     }
 }
 

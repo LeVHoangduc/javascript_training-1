@@ -49,8 +49,56 @@
 .features__filter {
   justify-content: center;
   align-items: center;
+  position: relative;
+}
 
+.features__filter > .btn {
   width: 40px;
+}
+
+.rot-90 {
+  transition: transform 0.5s ease;
+  transform: rotate(90deg);
+}
+
+.features__filter > .relation-dropdown {
+  display: none;
+  position: absolute;
+  top: 120%;
+
+  padding: 0px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--secondary-color);
+  background-color: var(--bg-light-color);
+
+  flex-direction: column;
+}
+
+.features__filter > .relation-dropdown--active {
+  display: flex;
+}
+
+.relation-dropdown__li {
+  padding: 10px;
+
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.relation-dropdown > input {
+  display: none;
+}
+
+.relation-dropdown > input:checked + label {
+  color: var(--primary-color);
+}
+
+.relation-dropdown__li:hover {
+  color: var(--primary-color);
+}
+
+.relation-dropdown__li:not(:last-child) {
+  border-bottom: 1px solid var(--secondary-color);
 }
 
 .features__add {
