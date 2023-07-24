@@ -24,7 +24,7 @@ class Controller {
     const contacts = this.model.contact.getContacts();
     const contactInfo = this.model.contact.getContactInfo();
     this.view.contact.renderContactList(contacts);
-    this.view.contact.renderContactInfo(contactInfo);
+    this.view.contact.renderContactInfo(contactInfo, this.deleteContact, this.editContact);
     this.view.contact.addEventAddContact(this.addContact);
     this.view.contact.addDelegateShowInfo(this.showInfo);
     this.view.contact.addEventSearchContact(this.searchContact);
@@ -68,6 +68,7 @@ class Controller {
 
   getContactById = (id) => {
     this.model.contact.getContactById(id);
+    return this.model.contact.getContactInfo();
   }
 
   searchContact = (searchKey) => {

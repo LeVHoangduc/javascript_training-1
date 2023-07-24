@@ -18,6 +18,8 @@
   --secondary-color: #b5b7c0;
   --gray-color: #696969;
   --black-color: #000000;
+  --warning-color: #f00;
 
   --bg-light-color: #ffffff;
+  --bg-input-light: #f9fbff;
 }

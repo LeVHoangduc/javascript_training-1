@@ -42,6 +42,7 @@ class Contacts {
   async getContactById(id) {
     const data = await Service.getContactById(id);
     this.contactInfo = new Contact(data);
+    return this.contactInfo;
   }
 
   async addContact(name, relation, phone, email, avatar) {

@@ -70,6 +70,10 @@ p {
   color: var(--bg-light-color);
 }
 
+.text--warning {
+  color: var(--warning-color);
+}
+
 /*-----------------------------------------*\
   #SET FONT FAMILY
 \*-----------------------------------------*/

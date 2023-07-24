@@ -16,7 +16,7 @@
 
   padding: 52px;
 
-  scale: 0.8;
+  scale: 0.9;
 }
 
 .modal--active {
@@ -45,7 +45,24 @@
 .modal__inputs__field {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+}
+
+.modal__inputs__field > p {
+  margin-bottom: 13px;
+}
+
+.modal__inputs__field > span {
+  display: none;
+  margin-top: 7px;
+}
+
+.modal__inputs__field > .warning-text {
+  display: none;
+  margin-top: 7px;
+}
+
+.modal__inputs__field > .warning-text--active {
+  display: block;
 }
 
 .modal__inputs__field > input,
