@@ -1,44 +1,44 @@
 {
   "contacts": [
     {
-      "id": "2",
-      "name": "Joseph Kunde",
-      "relation": "friend",
-      "phone": "8332151447",
-      "email": "Nova.Wolf15@yahoo.com",
-      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/img_1_uxgxdk.png"
-    },
-    {
-      "name": "Christie Schimmel",
-      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/img_1_uxgxdk.png",
-      "phone": "4766973074",
-      "email": "Roma.Ratke99@gmail.com",
-      "relation": "friend",
-      "id": "3"
-    },
-    {
-      "name": "Silvia Mohr",
-      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/ava_2_ovtgx0.png",
+      "id": "4",
+      "name": "Silvia Moh",
+      "relation": "1",
       "phone": "7275176874",
       "email": "Icie.Howell@hotmail.com",
-      "relation": "family",
-      "id": "4"
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/ava_2_ovtgx0.png"
     },
     {
       "id": "5",
-      "name": "Maria Stoltenberg",
-      "relation": "family",
+      "name": "Maria Stoltenbe",
+      "relation": "2",
       "phone": "0903589994",
       "email": "Mario_Bosco77@gmail.com",
       "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/img_1_uxgxdk.png"
     },
     {
-      "name": "Ngo Hong Hoang",
-      "relation": "family",
-      "phone": "0935487037",
-      "email": "honghoangngo@gmail.com",
-      "avatar": "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-      "id": "hTEWL97"
+      "id": "gcxrtNm",
+      "name": "Joseph Kund",
+      "relation": "1",
+      "phone": "8332151447",
+      "email": "Nova.Wolf15@yahoo.com",
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/ava_2_ovtgx0.png"
+    },
+    {
+      "id": "F_q2ZKG",
+      "name": "Joseph Kunde",
+      "relation": "3",
+      "phone": "8332151447",
+      "email": "Nova.Wolf15@yahoo.com",
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/img_1_uxgxdk.png"
+    },
+    {
+      "name": "Ngo",
+      "relation": "1",
+      "phone": "4564645644",
+      "email": "Nova.Wolf15@yahoo.com",
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/img_1_uxgxdk.png",
+      "id": "wcK5IC8"
     }
   ],
   "relations": [

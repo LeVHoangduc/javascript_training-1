@@ -5,4 +5,5 @@ export const MESSAGE = {
     INVALID_PHONE: 'The phone number is invalid',
     EMAIL_REQUIRED: 'The email address is required',
     INVALID_EMAIL: 'The email address is invalid',
+    CONFIRM_MESSAGE: 'Do you want to delete contact: ',
 }

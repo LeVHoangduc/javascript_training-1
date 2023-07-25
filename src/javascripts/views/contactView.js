@@ -11,7 +11,15 @@ class ContactView {
         this.searchInputEl = document.querySelector(".features__search__input");
         this.filterBtnEl = document.querySelector(".features__filter > button");
         this.filterDropDown = document.querySelector(".relation-dropdown");
-        this.filterOptionEl = ".relation-dropdown__li";
+
+        this.infoAvatarEl = this.infoEl.querySelector(".info__head__avatar > img");
+        this.infoNameEl = this.infoEl.querySelector(".info__head__name");
+        this.infoRelationEl = this.infoEl.querySelector(".info__head__relation");
+        this.infoPhoneEl = this.infoEl.querySelector(".detail__phone");
+        this.infoEmailEl = this.infoEl.querySelector(".detail__email");
+        this.infoGrpBtnEl = this.infoEl.querySelector(".info__buttons");
+        this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
+        this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
     }
 
     //----- RENDERING -----//
@@ -27,13 +35,13 @@ class ContactView {
         this.contactListEl.innerHTML += contactTemplate;
     }
 
-    renderContactInfo(contactInfo, deleteContact, editContact) {
-        const infoTemplate = Template.info(contactInfo);
-        this.infoEl.innerHTML = infoTemplate;
-        this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
-        this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
-        this.addEventDeleteContact(this.deleteBtnEl, deleteContact);
-        this.addEventEditContact(this.editBtnEl, editContact);
+    renderContactInfo(contactInfo) {
+        this.infoAvatarEl.setAttribute("src", contactInfo.avatar);
+        this.infoNameEl.innerText = `${contactInfo.name}`;
+        this.infoRelationEl.innerText = `${contactInfo.relation.name}`;
+        this.infoPhoneEl.innerText = `${contactInfo.phone}`;
+        this.infoEmailEl.innerText = `${contactInfo.email}`;
+        this.infoGrpBtnEl.setAttribute("data-id", contactInfo.id);
     }
 
     //----- EVENT HANDLER -----//
@@ -51,22 +59,22 @@ class ContactView {
         });
     }
 
-    addEventDeleteContact = (El, deleteContact) => {
-        El.addEventListener("click", (event) => {
+    addEventDeleteContact = (confirmDelete) => {
+        this.deleteBtnEl.addEventListener("click", (event) => {
             const contactId = event.target.parentNode.getAttribute("data-id");
-            deleteContact(contactId);
+            confirmDelete(contactId);
         })
     }
 
-    addEventEditContact = (El, editContact) => {
-        El.addEventListener("click", (event) => {
+    addEventEditContact = (editContact) => {
+        this.editBtnEl.addEventListener("click", (event) => {
             const contactId = event.target.parentNode.getAttribute("data-id");
             editContact(contactId);
         })
     }
 
     addEventSearchContact = (searchContact) => {
-        this.searchInputEl.addEventListener("change", (event) => {
+        this.searchInputEl.addEventListener("keyup", (event) => {
             searchContact(event.target.value);
         });
     }
@@ -79,9 +87,10 @@ class ContactView {
     }
 
     addDelegateFilterContact = (filterContact) => {
-        this.filterDropDown.addEventListener("click", (event) => {
-            const el = event.target.closest(this.filterOptionEl);
-            const relation = el.innerText;
+        this.filterDropDown.addEventListener("change", (event) => {
+            const el = event.target.closest("input");
+            console.log(el);
+            const relation = el.value;
             filterContact(relation);
         })
     }

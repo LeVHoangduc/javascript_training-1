@@ -10,7 +10,7 @@
   <body>
     <!-- Start Header -->
     <header class="header">
-      <h1 class="text text--fantastic text--black text--normal text--2xl">Address Book</h1>
+      <a href="" class="text text--fantastic text--black text--normal text--2xl">Address Book</a>
       <div class="features">
         <div class="features__search">
           <span class="features__search__icon"></span>
@@ -21,7 +21,7 @@
             <img src="assets/icons/filter-icon.svg" alt="filter-icon" />
           </button>
           <form class="relation-dropdown">
-            <input type="radio" id="0" name="filter_option" value="All" checked />
+            <input type="radio" id="0" name="filter_option" value="0" checked />
             <label class="relation-dropdown__li text text--gray text--normal text--lg" for="0">All</label>
             <!-- Place to put relation dropdown -->
           </form>
@@ -45,7 +45,40 @@
 
       <!-- Start contact information -->
       <section class="info col-3">
-        <!-- Place to put info template -->
+        <div class="info__head">
+          <div class="info__head__avatar">
+            <img src="assets/images/avatar-example.png" alt="avatar" />
+          </div>
+          <p class="info__head__name text text--black text--normal text--lg"></p>
+          <p class="info__head__relation text text--gray text--medium text--sm"></p>
+        </div>
+        <div class="info__body">
+          <h2 class="info__body__title text text--fantastic text--normal text-sm">Contact</h2>
+          <div class="info__body__contact">
+            <div class="detail detail--phone">
+              <div class="detail__left">
+                <p class="text text--medium text--sm text--gray">Phone number</p>
+                <p class="detail__phone text text--medium text--sm text--black"></p>
+              </div>
+              <div class="detail__right">
+                <img src="assets/icons/phone-icon.svg" alt="phone" />
+              </div>
+            </div>
+            <div class="detail detail--mail">
+              <div class="detail__left">
+                <p class="text text--medium text--sm text--gray">Email Address</p>
+                <p class="detail__email text text--medium text--sm text--black"></p>
+              </div>
+              <div class="detail__right">
+                <img src="assets/icons/mail-icon.svg" alt="mail" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="info__buttons" data-id="">
+          <button class="info__button__edit btn btn--primary text text--medium text--sm">Edit</button>
+          <button class="info__button__delete btn btn--secondary text text--medium text--sm">Delete</button>
+        </div>
       </section>
       <!-- End contact information -->
     </div>
@@ -95,6 +128,18 @@
       </div>
     </form>
     <!-- End modal -->
+
+    <!-- Start confirm modal -->
+    <div class="confirm-modal">
+      <p class="confirm-modal__message text text--lg text--medium"></p>
+      <div class="confirm-modal__buttons">
+        <button type="button" class="confirm-modal__buttons__confirm btn btn--primary text text--white text--semibold text--xl">Yes</button>
+        <button type="button" class="confirm-modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <!-- End confirm modal -->
     <script type="module" src="./javascripts/main.js"></script>
   </body>
 </html>

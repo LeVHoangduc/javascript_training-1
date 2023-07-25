@@ -14,14 +14,14 @@ class Relations {
    */
   async init() {
     const data = await Service.getRelationList();
-    this.relations = this.parseData(data);
+    this.relations = await this.parseData(data);
   }
 
   /**
    * Parsing data from JSON object to list of Relation object
    * @param {JSON} data
    */
-  parseData(data) {
+  async parseData(data) {
     return data.map((item) => new Relation(item));
   }
 
@@ -30,6 +30,13 @@ class Relations {
    */
   getRelations() {
     return this.relations;
+  }
+
+  /**
+   * Get relation name by ID
+   */
+  getRelationById = (id) => {
+    return this.relations.find((relation) => relation.id === id);
   }
 }
 
