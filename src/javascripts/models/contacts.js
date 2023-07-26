@@ -1,4 +1,4 @@
-import Service from "../services/service";
+import contactService from "../services/contactService";
 import Contact from "./contact";
 
 class Contacts {
@@ -6,9 +6,12 @@ class Contacts {
    * Constructor of Contacts object
    */
   constructor() {
+    this.service = new contactService();
+
     this.contactList;
     this.contactDisplayList;
     this.contactInfo;
+
     this.searchKey;
     this.filterOpt;
   }
@@ -17,7 +20,7 @@ class Contacts {
    * Initializing the Contacts object
    */
   async init() {
-    const data = await Service.getContactList();
+    const data = await this.service.getContactList();
     this.contactList = await this.parseData(data);
   }
 
@@ -55,15 +58,15 @@ class Contacts {
     return this.contactInfo;
   }
 
-  async addContact(name, relation, phone, email, avatar) {
-    const contact = new Contact({ name, relation, phone, email, avatar });
+  async addContact(data) {
+    const contact = new Contact(data);
     this.contactList.push(contact);
-    await Service.addContact(contact);
+    await this.service.addContact(contact);
   }
 
-  async editContact(id, name, relation, phone, email, avatar) {
-    const contact = new Contact({ id, name, relation, phone, email, avatar });
-    await Service.editContact(contact);
+  async editContact(data) {
+    const contact = new Contact(data);
+    await this.service.editContact(contact);
     this.contactList = this.contactList.map((item) => {
       if (item.id === contact.id) {
         return contact
@@ -73,13 +76,13 @@ class Contacts {
   }
 
   async deleteContactById(id) {
-    await Service.deleteContactById(id);
+    await this.service.deleteContactById(id);
     this.contactList = this.contactList.filter((item) => item.id !== id);
     this.contactInfo = this.contactDisplayList[0];
   }
 
   setSearchKey(searchKey) {
-    this.searchKey = searchKey;
+    this.searchKey = searchKey.toLowerCase();
   }
 
   setFilterOpt(filterOpt) {

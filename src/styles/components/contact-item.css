@@ -9,6 +9,10 @@
   padding: 9px;
 }
 
+.contact-item--active {
+  background-color: rgba(137, 137, 137, 0.1);
+}
+
 .contact-item:hover {
   background-color: rgba(137, 137, 137, 0.1);
 }

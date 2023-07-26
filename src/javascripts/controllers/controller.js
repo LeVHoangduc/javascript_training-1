@@ -42,11 +42,21 @@ class Controller {
     this.view.contact.renderContactList(contacts);
   }
 
-  saveContact = async (id, name, relation, phone, email, avatar) => {
-    if (!id) {
-      await this.model.contact.addContact(name, relation, phone, email, avatar);
+  saveContact = async (contact) => {
+    if (!contact.id) {
+      const { v4: uuidv4 } = require("uuid");
+      await this.model.contact.addContact(
+        {
+          id: uuidv4(),
+          name: contact.name,
+          relation: contact.relation,
+          phone: contact.phone,
+          email: contact.email,
+          avatar: contact.avatar,
+        }
+      );
     } else {
-      await this.model.contact.editContact(id, name, relation, phone, email, avatar);
+      await this.model.contact.editContact(contact);
       this.showInfo(id);
     }
     this.loadListContacts();

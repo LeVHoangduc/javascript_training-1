@@ -1,11 +1,13 @@
-import Service from "../services/service";
+import relationService from "../services/relationService";
 import Relation from "./relation";
 
 class Relations {
+
   /**
    * Constructor of Relations object
    */
   constructor() {
+    this.service = new relationService;
     this.relations;
   }
 
@@ -13,7 +15,7 @@ class Relations {
    * Initializing the Relations object
    */
   async init() {
-    const data = await Service.getRelationList();
+    const data = await this.service.getRelationList();
     this.relations = await this.parseData(data);
   }
 

@@ -47,7 +47,9 @@ class ContactView {
     //----- EVENT HANDLER -----//
     addDelegateShowInfo = (showInfo) => {
         this.contactListEl.addEventListener("click", (event) => {
+            this.contactListEl.querySelectorAll(this.contactEl).forEach((contactEl) => contactEl.classList.remove("contact-item--active"))
             const el = event.target.closest(this.contactEl);
+            el.classList.add("contact-item--active");
             const contactId = el.getAttribute("data-id");
             showInfo(contactId);
         })
@@ -89,7 +91,6 @@ class ContactView {
     addDelegateFilterContact = (filterContact) => {
         this.filterDropDown.addEventListener("change", (event) => {
             const el = event.target.closest("input");
-            console.log(el);
             const relation = el.value;
             filterContact(relation);
         })
