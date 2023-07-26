@@ -24,6 +24,12 @@ class apiRequest {
         return this.sendRequest(`${path}/${id}`, 'DELETE');
     }
 
+    /**
+     * Send the HTTP request to the API_GATEWAY_URL endpoint
+     * @param {String} path 
+     * @param {String} method 
+     * @param {object} body 
+     */
     async sendRequest(path, method, body) {
         const url = `${this.baseUrl}${path}`;
         try {

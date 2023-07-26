@@ -21,6 +21,7 @@ class contactService {
 
   /**
    * Get contact by Id from database.
+   * @param {String} id 
    */
   async getContactbyId(id) {
     const data = await this.apiRequest.get(this.path, id);
@@ -29,6 +30,7 @@ class contactService {
 
   /**
    * Add contact to database.
+   * @param {Object} contact 
    */
   async addContact(contact) {
     await this.apiRequest.post(this.path, contact);
@@ -36,6 +38,7 @@ class contactService {
 
   /**
    * Edit contact from database.
+   * @param {Object} contact 
    */
   async editContact(contact) {
     await this.apiRequest.patch(this.path, contact.id, contact);
@@ -43,6 +46,7 @@ class contactService {
 
   /**
    * Delete contact from database.
+   * @param {String} id 
    */
   async deleteContactById(id) {
     await this.apiRequest.delete(this.path, id);

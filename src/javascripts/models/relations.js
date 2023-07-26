@@ -4,7 +4,7 @@ import Relation from "./relation";
 class Relations {
 
   /**
-   * Constructor of Relations object
+   * Constructor of Relations object.
    */
   constructor() {
     this.service = new relationService;
@@ -12,7 +12,7 @@ class Relations {
   }
 
   /**
-   * Initializing the Relations object
+   * Initializing the Relations model.
    */
   async init() {
     const data = await this.service.getRelationList();
@@ -20,22 +20,23 @@ class Relations {
   }
 
   /**
-   * Parsing data from JSON object to list of Relation object
-   * @param {JSON} data
+   * Parsing data from array to array of Relation object.
+   * @param {Array} data
    */
   async parseData(data) {
     return data.map((item) => new Relation(item));
   }
 
   /**
-   * Get list of Relation objects
+   * Get list of Relation objects.
    */
   getRelations() {
     return this.relations;
   }
 
   /**
-   * Get relation name by ID
+   * Get relation object by ID.
+   * @param {String} id 
    */
   getRelationById = (id) => {
     return this.relations.find((relation) => relation.id === id);

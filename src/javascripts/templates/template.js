@@ -6,7 +6,7 @@ class Template {
 
     /**
      * HTML Template for render an Contact object
-     * @param {object} contact 
+     * @param {Object} contact 
      */
     static contact = (contact) => `
     <li class="contact-item row" data-id="${contact.id}">
@@ -22,10 +22,18 @@ class Template {
     </li>
   `;
 
+    /**
+     * HTML Template for the relation list in modal.
+     * @param {Object} relation 
+     */
     static relation = (relation) => `
     <option value="${relation.id}">${relation.name}</option>
     `
 
+    /**
+     * HTML Template for the relation list filter's dropdown.
+     * @param {Object} relation 
+     */
     static relationDropDown = (relation) => `  
     <input type="radio" id="${relation.id}" name="filter_option" value="${relation.id}">     
     <label class="relation-dropdown__li text text--gray text--normal text--lg" for="${relation.id}">${relation.name}</label>

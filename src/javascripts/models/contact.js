@@ -1,7 +1,7 @@
 class Contact {
   /**
    * Constructor of Contact object
-   * @param {object} data
+   * @param {Object} data
    */
   constructor(data) {
     this.id = data.id;

@@ -9,3 +9,10 @@ export const MESSAGE = {
     INVALID_AVATAR: 'The avatar is invalid',
     CONFIRM_MESSAGE: 'Do you want to delete contact: ',
 }
+
+export const REGEX = {
+    NAME: /^[a-zA-Z\s]+$/,
+    PHONE: /^\d{10}$/,
+    EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    AVATAR: /\.(jpeg|jpg|png|gif|bmp|svg)$/i,
+}

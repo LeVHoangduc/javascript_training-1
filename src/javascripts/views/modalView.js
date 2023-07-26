@@ -1,8 +1,8 @@
-import { MESSAGE } from "../constants/message";
-
+import formValidator from "../helpers/form-validate";
+import { MESSAGE } from "../constants/constants";
 class ModalView {
     /**
-     * Constructor of ModalView object
+     * Constructor of ModalView object.
      */
     constructor() {
         this.modalEl = document.querySelector(".modal");
@@ -11,19 +11,15 @@ class ModalView {
         this.overlayEl = document.querySelector(".overlay");
         this.cancelBtnEl = document.querySelectorAll(".modal__top__btn,.modal__buttons__cancel,.confirm-modal__buttons__cancel,.overlay");
         this.confirmBtnEl = this.confirmModalEl.querySelector(".confirm-modal__buttons__confirm");
-
-        this.nameInput = this.modalEl.name;
-        this.nameError = this.nameInput.nextElementSibling;
-        this.phoneInput = this.modalEl.phone;
-        this.phoneError = this.phoneInput.nextElementSibling;
-        this.emailInput = this.modalEl.email;
-        this.emailError = this.emailInput.nextElementSibling;
-        this.avatarInput = this.modalEl.avatar;
-        this.avatarError = this.avatarInput.nextElementSibling;
     }
 
     //----- RENDERING -----//
 
+    /**
+     * Display the modal for adding and editing a contact.
+     * @param {String} contactId 
+     * @param {Object} contact 
+     */
     async renderModal(contactId, contact) {
         this.modalEl.classList.add("modal--active");
         this.overlayEl.classList.add("overlay--active");
@@ -37,6 +33,10 @@ class ModalView {
         };
     }
 
+    /**
+     * Display confirm modal when delete a contact.
+     * @param {Object} contact 
+     */
     renderConfirmModal = (contact) => {
         this.confirmModalEl.classList.add('confirm-modal--active');
         this.overlayEl.classList.add("overlay--active");
@@ -46,18 +46,21 @@ class ModalView {
 
     //----- EVENT HANDLER -----//
 
+    /**
+     * Add event listener for cancel modals.
+     */
     addEventCancelModal = () => {
         this.cancelBtnEl.forEach((btn) => {
             btn.addEventListener("click", () => {
-                this.modalEl.classList.remove("modal--active");
-                this.confirmModalEl.classList.remove("confirm-modal--active");
-                this.overlayEl.classList.remove("overlay--active");
-                this.modalEl.removeAttribute("data-id");
                 this.resetModal();
             });
         })
     }
 
+    /**
+     * Add event listener for form submission.
+     * @param {Function} saveContact 
+     */
     addEventSubmission = (saveContact) => {
         this.modalEl.addEventListener("submit", async (event) => {
             event.preventDefault();
@@ -69,25 +72,17 @@ class ModalView {
                 email: this.modalEl.email.value,
                 avatar: this.modalEl.avatar.value,
             }
-
-            if (this.validateForm(contact)) {
-                this.modalEl.classList.remove("modal--active");
-                this.overlayEl.classList.remove("overlay--active");
+            if (formValidator(contact)) {
                 saveContact(contact);
                 this.resetModal();
             }
         })
     }
 
-    resetModal = () => {
-        this.modalEl.removeAttribute("data-id");
-        this.modalEl.reset();
-        this.modalEl.querySelectorAll('input').forEach((El) => {
-            El.classList.remove('input--warning');
-            El.nextElementSibling.classList.remove('warning-text--active');
-        });
-    }
-
+    /**
+     * Add event listener for Yes button in Confirm delete modal.
+     * @param {Function} deleteContact 
+     */
     addEventDeleteConfirmed = (deleteContact) => {
         this.confirmBtnEl.addEventListener("click", () => {
             const id = this.confirmModalEl.getAttribute("data-id");
@@ -97,91 +92,21 @@ class ModalView {
         })
     }
 
-    //----- VALIDATE FORM -----//
+    //----- OTHER FUNCTIONS -----//
 
-    validateForm(contact) {
-
-        let isValid = true;
-
-        // Expressions for validation
-        const nameRegex = /^[a-zA-Z\s]+$/;
-        const phoneRegex = /^\d{10}$/;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const avatarRegex = /\.(jpeg|jpg|png|gif|bmp|svg)$/i;
-
-        // Validation checks
-        const isNameValid = nameRegex.test(contact.name);
-        const isPhoneValid = phoneRegex.test(contact.phone);
-        const isEmailValid = emailRegex.test(contact.email);
-        const isAvatarValid = avatarRegex.test(contact.avatar);
-
-        console.log(isNameValid, isPhoneValid, isEmailValid, isAvatarValid);
-
-        if (contact.name.trim() === '') {
-            this.modalEl.name.classList.add('input--warning');
-            this.nameError.textContent = `${MESSAGE.NAME_REQUIRED}`;
-            this.nameError.classList.add('warning-text--active');
-            isValid = false;
-        } else if (!isNameValid) {
-            this.modalEl.name.classList.add('input--warning');
-            this.nameError.textContent = `${MESSAGE.INVALID_NAME}`;
-            this.nameError.classList.add('warning-text--active');
-            isValid = false;
-        } else if (isNameValid) {
-            this.modalEl.name.classList.remove('input--warning');
-            this.nameError.textContent = ``;
-            this.nameError.classList.remove('warning-text--active');
-        }
-
-        if (contact.phone.trim() === '') {
-            this.modalEl.phone.classList.add('input--warning');
-            this.phoneError.textContent = `${MESSAGE.PHONE_REQUIRED}`;
-            this.phoneError.classList.add('warning-text--active');
-            isValid = false;
-        } else if (!isPhoneValid) {
-            this.modalEl.phone.classList.add('input--warning');
-            this.phoneError.textContent = `${MESSAGE.INVALID_PHONE}`;
-            this.phoneError.classList.add('warning-text--active');
-            isValid = false;
-        } else if (isPhoneValid) {
-            this.modalEl.phone.classList.remove('input--warning');
-            this.phoneError.textContent = ``;
-            this.phoneError.classList.remove('warning-text--active');
-        }
-
-        if (contact.email.trim() === '') {
-            this.modalEl.email.classList.add('input--warning');
-            this.emailError.textContent = `${MESSAGE.EMAIL_REQUIRED}`;
-            this.emailError.classList.add('warning-text--active');
-            isValid = false;
-        } else if (!isEmailValid) {
-            this.modalEl.email.classList.add('input--warning');
-            this.emailError.textContent = `${MESSAGE.INVALID_EMAIL}`;
-            this.emailError.classList.add('warning-text--active');
-            isValid = false;
-        } else if (isEmailValid) {
-            this.modalEl.email.classList.remove('input--warning');
-            this.emailError.textContent = ``;
-            this.emailError.classList.remove('warning-text--active');
-        }
-
-        if (contact.avatar.trim() === '') {
-            this.modalEl.avatar.classList.add('input--warning');
-            this.avatarError.textContent = `${MESSAGE.AVATAR_REQUIRED}`;
-            this.avatarError.classList.add('warning-text--active');
-            isValid = false;
-        } else if (!isAvatarValid) {
-            this.modalEl.avatar.classList.add('input--warning');
-            this.avatarError.textContent = `${MESSAGE.INVALID_AVATAR}`;
-            this.avatarError.classList.add('warning-text--active');
-            isValid = false;
-        } else if (isAvatarValid) {
-            this.modalEl.avatar.classList.remove('input--warning');
-            this.avatarError.textContent = ``;
-            this.avatarError.classList.remove('warning-text--active');
-        }
-
-        return isValid;
+    /**
+     * Reset modals status.
+     */
+    resetModal = () => {
+        this.modalEl.classList.remove("modal--active");
+        this.confirmModalEl.classList.remove("confirm-modal--active");
+        this.overlayEl.classList.remove("overlay--active");
+        this.modalEl.removeAttribute("data-id");
+        this.modalEl.reset();
+        this.modalEl.querySelectorAll('input').forEach((El) => {
+            El.classList.remove('input--warning');
+            El.nextElementSibling.classList.remove('warning-text--active');
+        });
     }
 }
 

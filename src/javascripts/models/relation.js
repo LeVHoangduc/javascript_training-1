@@ -1,7 +1,7 @@
 class Relation {
   /**
    * Constructor of Relation object
-   * @param {object} data
+   * @param {Object} data
    */
   constructor(data) {
     this.id = data.id;
