@@ -21,7 +21,7 @@ class apiRequest {
     }
 
     delete(path, id) {
-        return this.sendRequest(`${path}/${id}`, 'DELETE', data);
+        return this.sendRequest(`${path}/${id}`, 'DELETE');
     }
 
     async sendRequest(path, method, body) {
