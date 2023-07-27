@@ -1,24 +1,27 @@
 :root {
-  primary-font: "Inter";
-  secondary-font: "Jua";
+  --primary-font: "Inter";
+  --secondary-font: "Jua";
 
-  fw-normal: 400;
-  fw-medium: 500;
-  fw-semibolde: 600;
-  fw-bold: 700;
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
 
-  text-xs: 12px;
-  text-base: 15px;
-  text-lg: 18px;
-  text-xl: 20px;
-  text-2xl: 24px;
-  text-3xl: 36px;
+  --text-xs: 12px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 36px;
 
-  primary-color: #55c875;
-  secondary-color: #eeeeee;
-  yellow-color: #f2e189;
-  gray-color: #696969;
-  black-color: #000000;
+  --primary-color: #55c875;
+  --primary-subcolor: #44a05d;
+  --secondary-color: #b5b7c0;
+  --secondary-subcolor: #909299;
+  --gray-color: #696969;
+  --black-color: #000000;
+  --warning-color: #f00;
 
-  bg-light-color: #ffffff;
+  --bg-light-color: #ffffff;
+  --bg-input-light: #f9fbff;
 }

@@ -1,0 +1,45 @@
+/*------------------------------------*\
+  #GRID SYSTEM
+\*------------------------------------*/
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+
+  width: 100%;
+}
+
+.col-1 {
+  grid-column: auto / span 1;
+}
+
+.col-2 {
+  grid-column: auto / span 2;
+}
+
+.col-3 {
+  grid-column: auto / span 3;
+}
+
+.col-4 {
+  grid-column: auto / span 4;
+}
+
+.col-6 {
+  grid-column: auto / span 6;
+}
+
+.col-7 {
+  grid-column: auto / span 7;
+}
+
+.col-8 {
+  grid-column: auto / span 8;
+}
+
+.col-10 {
+  grid-column: auto / span 10;
+}
+.col-12 {
+  grid-column: auto / span 12;
+}

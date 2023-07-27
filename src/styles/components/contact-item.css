@@ -1,0 +1,36 @@
+.contact-item {
+  align-items: center;
+
+  border-radius: 10px;
+  border: 0.5px solid rgba(137, 137, 137, 0.43);
+
+  cursor: pointer;
+
+  padding: 9px;
+}
+
+.contact-item--active {
+  background-color: rgba(137, 137, 137, 0.1);
+}
+
+.contact-item:hover {
+  background-color: rgba(137, 137, 137, 0.1);
+}
+
+.contact-item__avatar {
+  width: 70px;
+  height: 77px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.contact-item__avatar > img {
+  width: 100%;
+  height: 100%;
+}
+
+.contact-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

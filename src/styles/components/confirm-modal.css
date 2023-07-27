@@ -1,0 +1,30 @@
+.confirm-modal {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 52px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 30px;
+
+  background-color: var(--bg-light-color);
+
+  padding: 52px;
+}
+
+.confirm-modal--active {
+  display: flex;
+}
+
+.confirm-modal__buttons {
+  display: flex;
+  gap: 30px;
+}
+
+.confirm-modal__buttons > button {
+  width: 120px;
+}

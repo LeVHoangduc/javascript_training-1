@@ -1,46 +1,58 @@
 {
   "contacts": [
-    [
-      {
-        "name": "Ruth Bruen DVM",
-        "avatar": "https://asset.cloudinary.com/de59jbjlb/26ee65b29a40abe084d4f733b76bc4d2",
-        "phone_number": "(787) 263-8604",
-        "email": "Diego.Cummings33@gmail.com",
-        "relation": "family",
-        "id": "1"
-      },
-      {
-        "name": "Joseph Kunde",
-        "avatar": "https://asset.cloudinary.com/de59jbjlb/3c6f3aa51c2b736cd0a1b0d3df0457d4",
-        "phone_number": "833-215-1447 x650",
-        "email": "Nova.Wolf15@yahoo.com",
-        "relation": "friend",
-        "id": "2"
-      },
-      {
-        "name": "Christie Schimmel",
-        "avatar": "https://asset.cloudinary.com/de59jbjlb/26ee65b29a40abe084d4f733b76bc4d2",
-        "phone_number": "476.697.3074",
-        "email": "Roma.Ratke99@gmail.com",
-        "relation": "friend",
-        "id": "3"
-      },
-      {
-        "name": "Silvia Mohr",
-        "avatar": "https://asset.cloudinary.com/de59jbjlb/26ee65b29a40abe084d4f733b76bc4d2",
-        "phone_number": "727-517-6874",
-        "email": "Icie.Howell@hotmail.com",
-        "relation": "family",
-        "id": "4"
-      },
-      {
-        "name": "Maria Stoltenberg",
-        "avatar": "https://asset.cloudinary.com/de59jbjlb/3c6f3aa51c2b736cd0a1b0d3df0457d4",
-        "phone_number": "1-436-874-0500 x777",
-        "email": "Mario_Bosco77@gmail.com",
-        "relation": "friend",
-        "id": "5"
-      }
-    ]
+    {
+      "id": "5",
+      "name": "Maria Stolt",
+      "relation": "2",
+      "phone": "0903589994",
+      "email": "Mario_Bosco77@gmail.com",
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/img_1_uxgxdk.png"
+    },
+    {
+      "id": "gcxrtNm",
+      "name": "Joseph Kund",
+      "relation": "1",
+      "phone": "8332151447",
+      "email": "Nova.Wolf15@yahoo.com",
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/ava_2_ovtgx0.png"
+    },
+    {
+      "id": "F_q2ZKG",
+      "name": "Joseph Kund",
+      "relation": "3",
+      "phone": "8332151447",
+      "email": "Nova.Wolf15@yahoo.com",
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/img_1_uxgxdk.png"
+    },
+    {
+      "id": "QNi7Z0s",
+      "name": "Joseph Kunde",
+      "relation": "1",
+      "phone": "0833215144",
+      "email": "Nova.Wolf15@yahoo.com",
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/ava_2_ovtgx0.png"
+    },
+    {
+      "id": "cd7645c9-f2a4-415f-b6cb-c7c86cabceaa",
+      "name": "Silvia Mo",
+      "relation": "1",
+      "phone": "7275176874",
+      "email": "Icie.Howell@hotmail.com",
+      "avatar": "https://res.cloudinary.com/de59jbjlb/image/upload/v1689584180/ava_2_ovtgx0.png"
+    }
+  ],
+  "relations": [
+    {
+      "id": "1",
+      "name": "family"
+    },
+    {
+      "id": "2",
+      "name": "friend"
+    },
+    {
+      "id": "3",
+      "name": "colleague"
+    }
   ]
 }

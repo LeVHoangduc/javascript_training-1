@@ -1,0 +1,7 @@
+.input {
+  background-color: var(--bg-input-light);
+}
+
+.input--warning {
+  border: 2px solid var(--warning-color) !important;
+}

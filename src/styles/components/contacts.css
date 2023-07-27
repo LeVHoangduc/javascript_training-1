@@ -1,0 +1,13 @@
+.contacts {
+  grid-column-start: 2;
+  padding: 20px;
+}
+
+.contacts__list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  height: 100vh;
+  overflow: scroll;
+}

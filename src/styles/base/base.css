@@ -1,0 +1,23 @@
+/* Hide the scrollbar for webkit-based browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 0.5em; /* Set the width of the scrollbar, adjust as needed */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Set the color of the scrollbar thumb */
+}
+
+/* Hide the scrollbar for Firefox */
+/* Note: Firefox uses a different pseudo-element for the scrollbar thumb */
+html {
+  scrollbar-width: none;
+}
+
+/* For Microsoft Edge Legacy (not Chromium-based) */
+/* Use the -ms prefix for the scrollbar styles */
+@supports (-ms-ime-align: auto) {
+  /* Hide the scrollbar */
+  html {
+    -ms-overflow-style: none;
+  }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Start Header -->
+    <header class="header">
+      <a href="" class="text text--fantastic text--black text--normal text--2xl">Address Book</a>
+      <div class="features">
+        <div class="features__search">
+          <span class="features__search__icon"></span>
+          <input class="features__search__input text text--normal text--xs" type="text" placeholder="Search" />
+        </div>
+        <div class="features__filter">
+          <button class="btn btn--secondary">
+            <img src="assets/icons/filter-icon.svg" alt="filter-icon" />
+          </button>
+          <form class="relation-dropdown">
+            <input type="radio" id="0" name="filter_option" value="0" checked />
+            <label class="relation-dropdown__li text text--gray text--normal text--lg" for="0">All</label>
+            <!-- Place to put relation dropdown -->
+          </form>
+        </div>
+        <button class="features__add btn btn--primary">
+          <img src="assets/icons/plus-icon.svg" alt="add icon" />
+          <p class="text text--medium text--sm">New contact</p>
+        </button>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <div class="row">
+      <!-- Start contact list -->
+      <section class="contacts col-7">
+        <ul class="contacts__list">
+          <!-- Place to put contact template -->
+        </ul>
+      </section>
+      <!-- End contact list -->
+
+      <!-- Start contact information -->
+      <section class="info col-3">
+        <div class="info__head">
+          <div class="info__head__avatar">
+            <img src="assets/images/avatar-example.png" alt="avatar" />
+          </div>
+          <p class="info__head__name text text--black text--normal text--lg"></p>
+          <p class="info__head__relation text text--gray text--medium text--sm"></p>
+        </div>
+        <div class="info__body">
+          <h2 class="info__body__title text text--fantastic text--normal text-sm">Contact</h2>
+          <div class="info__body__contact">
+            <div class="detail detail--phone">
+              <div class="detail__left">
+                <p class="text text--medium text--sm text--gray">Phone number</p>
+                <a href="" class="detail__phone text text--medium text--sm text--black"></a>
+              </div>
+              <a href="" class="detail__right">
+                <img src="assets/icons/phone-icon.svg" alt="phone" />
+              </a>
+            </div>
+            <div class="detail detail--mail">
+              <div class="detail__left">
+                <p class="text text--medium text--sm text--gray">Email Address</p>
+                <a href="" class="detail__email text text--medium text--sm text--black"></a>
+              </div>
+              <a href="" class="detail__right">
+                <img src="assets/icons/mail-icon.svg" alt="mail" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="info__buttons" data-id="">
+          <button class="info__button__edit btn btn--primary text text--medium text--sm">Edit</button>
+          <button class="info__button__delete btn btn--secondary text text--medium text--sm">Delete</button>
+        </div>
+      </section>
+      <!-- End contact information -->
+    </div>
+    <!-- Start overlay -->
+    <div class="overlay"></div>
+    <!-- End overlay -->
+
+    <!-- Start modal -->
+    <form class="modal">
+      <div class="modal__top">
+        <h2 class="text text--black text--semibold text--3xl">Add contact</h2>
+        <button type="button" class="modal__top__btn">
+          <img src="assets/icons/cancel-icon.svg" alt="cancel" />
+        </button>
+      </div>
+      <div class="modal__inputs">
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Name *</p>
+          <input type="text" name="name" class="input text text--normal text--lg" />
+          <span class="warning-text text text--warning text--xs text--medium"></span>
+        </div>
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Relation *</p>
+          <select name="relation" class="relation-list text text--normal text--lg">
+            <!-- Place to relation template -->
+          </select>
+        </div>
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Phone number *</p>
+          <input type="number" name="phone" class="text text--normal text--lg" />
+          <span class="warning-text text text--warning text--xs text--medium"></span>
+        </div>
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Image *</p>
+          <input type="url" name="avatar" class="text text--normal text--lg" />
+          <span class="warning-text text text--warning text--xs text--medium"></span>
+        </div>
+        <div class="modal__inputs__field">
+          <p class="text text--gray text--bold text--xl">Email *</p>
+          <input type="email" name="email" class="text text--normal text--lg" />
+          <span class="warning-text text text--warning text--xs text--medium"></span>
+        </div>
+      </div>
+      <div class="modal__buttons">
+        <button type="submit" class="modal__buttons__submit btn btn--primary text text--white text--semibold text--xl">Submit</button>
+        <button type="button" class="modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">Cancel</button>
+      </div>
+    </form>
+    <!-- End modal -->
+
+    <!-- Start confirm modal -->
+    <div class="confirm-modal">
+      <p class="confirm-modal__message text text--lg text--medium"></p>
+      <div class="confirm-modal__buttons">
+        <button type="button" class="confirm-modal__buttons__confirm btn btn--primary text text--white text--semibold text--xl">Yes</button>
+        <button type="button" class="confirm-modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <!-- End confirm modal -->
+    <script type="module" src="./javascripts/main.js"></script>
+  </body>
+</html>
