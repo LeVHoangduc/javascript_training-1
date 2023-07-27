@@ -21,7 +21,7 @@ class Contacts {
    */
   async init() {
     const data = await this.service.getContactList();
-    this.contactList = await this.parseData(data);
+    this.contactList = this.parseData(data);
   }
 
   /**

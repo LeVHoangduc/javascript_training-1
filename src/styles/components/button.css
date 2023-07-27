@@ -16,6 +16,14 @@ button {
   background-color: var(--primary-color);
 }
 
+.btn--primary:hover {
+  background-color: var(--primary-subcolor);
+}
+
 .btn--secondary {
   background-color: var(--secondary-color);
+}
+
+.btn--secondary:hover {
+  background-color: var(--secondary-subcolor);
 }

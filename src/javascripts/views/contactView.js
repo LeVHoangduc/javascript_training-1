@@ -53,7 +53,9 @@ class ContactView {
         this.infoNameEl.innerText = `${contactInfo.name}`;
         this.infoRelationEl.innerText = `${contactInfo.relation.name}`;
         this.infoPhoneEl.innerText = `${contactInfo.phone}`;
+        this.infoPhoneEl.setAttribute("href", `tel:${contactInfo.phone}`);
         this.infoEmailEl.innerText = `${contactInfo.email}`;
+        this.infoEmailEl.setAttribute("href", `mailto:${contactInfo.email}`);
         this.infoGrpBtnEl.setAttribute("data-id", contactInfo.id);
     }
 
