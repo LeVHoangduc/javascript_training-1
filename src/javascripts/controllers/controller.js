@@ -27,7 +27,11 @@ class Controller {
    * Initializing the contact list and contact information.
    */
   initContacts = async () => {
-    await handleError(this.model.contact.init(), ERROR_MESSAGE.INIT_CONTACT_LIST);
+    try {
+      await this.model.contact.init();
+    } catch {
+      alert(ERROR_MESSAGE.INIT_CONTACT_LIST);
+    };
     this.loadListContacts();
     this.showInfo();
     this.view.contact.addEventEditContact(this.editContact);
@@ -46,7 +50,11 @@ class Controller {
     this.model.contact.initDisplayList(this.model.relation.getRelationById);
     this.model.contact.filterDisplayList(this.view.contact.filterParams);
     const contacts = this.model.contact.getContactDisplayList();
-    handleError(this.view.contact.renderContactList(contacts), MESSAGE_ERROR.RENDER_CONTACT_LIST);
+    try {
+      this.view.contact.renderContactList(contacts);
+    } catch {
+      alert(ERROR_MESSAGE.RENDER_CONTACT_LIST);
+    }
   }
 
   /**
@@ -56,8 +64,10 @@ class Controller {
   showInfo = async (contactId) => {
     if (contactId) this.model.contact.setContactInfo(contactId);
     const contactInfo = this.model.contact.getContactInfo();
-    if (contactInfo) {
-      handleError(this.view.contact.renderContactInfo(contactInfo), MESSAGE_ERROR.RENDER_CONTACT_INFO);
+    try {
+      this.view.contact.renderContactInfo(contactInfo, this.confirmDelete, this.editContact);
+    } catch {
+      alert(ERROR_MESSAGE.RENDER_CONTACT_INFO);
     }
   }
 
@@ -66,15 +76,28 @@ class Controller {
    * @param {String} contactId 
    */
   confirmDelete = async (contactId) => {
-    const contact = await handleError(this.model.contact.getContactById(contactId, this.model.relation.getRelationById), "Couldn't get contact information");
-    handleError(this.view.modal.openConfirmModal(contact), MESSAGE_ERROR.OPEN_CONFIRM_MODAL);
+    let contact;
+    try {
+      contact = await this.model.contact.getContactById(contactId, this.model.relation.getRelationById);
+    } catch {
+      alert(ERROR_MESSAGE.GET_CONTACT_INFO)
+    }
+    try {
+      this.view.modal.openConfirmModal(contact);
+    } catch {
+      alert(ERROR_MESSAGE.OPEN_CONFIRM_MODAL);
+    }
   }
 
   /**
    * Show a modal when click add contact.
    */
   addContact = () => {
-    handleError(this.view.modal.openModal(), MESSAGE_ERROR.OPEN_ADD_MODAL);
+    try {
+      this.view.modal.openModal();
+    } catch {
+      alert(ERROR_MESSAGE.OPEN_ADD_MODAL);
+    }
   }
 
   /**
@@ -82,7 +105,11 @@ class Controller {
    * @param {String} contactId 
    */
   deleteContact = async (contactId) => {
-    await handleError(this.model.contact.deleteContactById(contactId), MESSAGE_ERROR.DELETE_CONTACT);
+    try {
+      await this.model.contact.deleteContactById(contactId);
+    } catch {
+      alert(ERROR_MESSAGE.DELETE_CONTACT);
+    }
     this.loadListContacts();
     this.showInfo();
   }
@@ -92,8 +119,17 @@ class Controller {
    * @param {String} contactId 
    */
   editContact = async (contactId) => {
-    const contact = await handleError(this.model.contact.getContactById(contactId, this.model.relation.getRelationById), "Couldn't get contact information");
-    handleError(this.view.modal.openModal(contactId, contact), MESSAGE_ERROR.OPEN_EDIT_MODAL);
+    let contact;
+    try {
+      contact = await this.model.contact.getContactById(contactId, this.model.relation.getRelationById)
+    } catch {
+      alert(ERROR_MESSAGE.GET_CONTACT_INFO);
+    }
+    try {
+      this.view.modal.openModal(contactId, contact)
+    } catch {
+      alert(ERROR_MESSAGE.OPEN_EDIT_MODAL);
+    }
   }
 
   /**
@@ -118,9 +154,17 @@ class Controller {
         email: contact.email,
         avatar: contact.avatar,
       }
-      await handleError(this.model.contact.addContact(contact), MESSAGE_ERROR.ADD_CONTACT);
+      try {
+        await this.model.contact.addContact(contact);
+      } catch {
+        alert(ERROR_MESSAGE.ADD_CONTACT)
+      }
     } else {
-      await handleError(this.model.contact.editContact(contact), MESSENGER_ERROR.EDIT_CONTACT);
+      try {
+        await this.model.contact.editContact(contact)
+      } catch {
+        alert(ERROR_MESSAGE.EDIT_CONTACT)
+      }
     }
     this.loadListContacts();
     this.showInfo(contact.id);
@@ -132,7 +176,11 @@ class Controller {
    * Initializing the relation lists.
    */
   initRelations = async () => {
-    await handleError(this.model.relation.init(), MESSAGE_ERROR.INIT_RELATION_LIST)
+    try {
+      await this.model.relation.init();
+    } catch {
+      alert(ERROR_MESSAGE.INIT_RELATION_LIST);
+    };
     const relations = this.model.relation.getRelations();
     this.view.relation.renderRelationList(relations);
     this.view.relation.renderRelationDropdownList(relations);

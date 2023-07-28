@@ -13,13 +13,15 @@ export const MESSAGE = {
 export const ERROR_MESSAGE = {
     INIT_CONTACT_LIST: "Couldn't initialize contact list",
     INIT_RELATION_LIST: "Couldn't initialize relation list",
-    RENDER_CONTACT_LIST: "Couldn't render contact list",
-    RENDER_CONTACT_INFO: "Couldn't render contact info",
+    RENDER_CONTACT_LIST: "Couldn't display contact list",
+    RENDER_CONTACT_INFO: "Couldn't display contact info",
     OPEN_CONFIRM_MODAL: "Couldn't open confirm modal",
     OPEN_ADD_MODAL: "Couldn't open add modal",
     OPEN_EDIT_MODAL: "Couldn't open edit modal",
+    GET_CONTACT_INFO: "Couldn't get contact info",
     DELETE_CONTACT: "Couldn't delete contact",
     ADD_CONTACT: "Couldn't add contact",
+    EDIT_CONTACT: "Couldn't edit contact",
 }
 
 export const REGEX = {

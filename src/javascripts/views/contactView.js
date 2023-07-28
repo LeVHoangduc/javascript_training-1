@@ -50,7 +50,7 @@ class ContactView {
      * @param {Object} contact 
      */
     renderContact = (contact) => {
-        const contactTemplate = Template.contact(contact);
+        const contactTemplate = Template.renderContact(contact);
         this.contactListEl.innerHTML += contactTemplate;
     }
 
@@ -59,16 +59,18 @@ class ContactView {
      * @param {Object} contactInfo 
      */
     renderContactInfo = (contactInfo) => {
-        this.infoAvatarEl.setAttribute("src", contactInfo.avatar);
-        this.infoNameEl.innerText = `${contactInfo.name}`;
-        this.infoRelationEl.innerText = `${contactInfo.relation.name}`;
-        this.infoPhoneEl.innerText = `${contactInfo.phone}`;
-        this.infoPhoneEl.setAttribute("href", `tel:${contactInfo.phone}`);
-        this.infoPhoneIconEl.setAttribute("href", `tel:${contactInfo.phone}`);
-        this.infoEmailEl.innerText = `${contactInfo.email}`;
-        this.infoEmailEl.setAttribute("href", `mailto:${contactInfo.email}`);
-        this.infoEmailIconEl.setAttribute("href", `mailto:${contactInfo.email}`);
-        this.infoGrpBtnEl.setAttribute("data-id", contactInfo.id);
+        if (contactInfo) {
+            this.infoAvatarEl.setAttribute("src", contactInfo.avatar);
+            this.infoNameEl.innerText = `${contactInfo.name}`;
+            this.infoRelationEl.innerText = `${contactInfo.relation.name}`;
+            this.infoPhoneEl.innerText = `${contactInfo.phone}`;
+            this.infoPhoneEl.setAttribute("href", `tel:${contactInfo.phone}`);
+            this.infoPhoneIconEl.setAttribute("href", `tel:${contactInfo.phone}`);
+            this.infoEmailEl.innerText = `${contactInfo.email}`;
+            this.infoEmailEl.setAttribute("href", `mailto:${contactInfo.email}`);
+            this.infoEmailIconEl.setAttribute("href", `mailto:${contactInfo.email}`);
+            this.infoGrpBtnEl.setAttribute("data-id", contactInfo.id);
+        }
     }
 
     //----- EVENT HANDLER -----//
