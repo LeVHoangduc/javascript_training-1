@@ -1,15 +1,15 @@
 /**
- * Error handler for callbackFnc.
- * @param {Function} callbackFnc 
+ * Error handler for promise function.
+ * @param {Function} promise 
  * @param {String} message 
- * @returns {Function||undefined} callback function or undefined.
+ * @returns {Function|undefined} callback function or undefined.
  */
-const errorHandle = async (callbackFnc, message) => {
+const handleError = async (promise, message) => {
     try {
-        return await callbackFnc;
+        return await promise;
     } catch (err) {
         alert(`${message}`);
     }
 }
 
-export default errorHandle;
+export default handleError;

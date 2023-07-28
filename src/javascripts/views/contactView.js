@@ -4,13 +4,6 @@ class ContactView {
      * Constructor of ContactView object
      */
     constructor() {
-        this.filterParams = {
-            searchKey: "",
-            filter: {
-                relation: "0"
-            }
-        };
-
         this.contactListEl = document.querySelector(".contacts__list");
         this.infoEl = document.querySelector(".info");
         this.addBtnEl = document.querySelector(".features__add");
@@ -32,13 +25,20 @@ class ContactView {
 
     contactEl = ".contact-item";
 
+    filterParams = {
+        searchKey: "",
+        filter: {
+            relation: "0"
+        }
+    };
+
     //----- RENDERING -----//
 
     /**
      * Display the contact list.
      * @param {Array} contacts 
      */
-    renderContactList(contacts) {
+    renderContactList = (contacts) => {
         this.contactListEl.innerHTML = "";
         contacts.forEach(contact => {
             this.renderContact(contact);
@@ -49,7 +49,7 @@ class ContactView {
      * Render a contact in contact list.
      * @param {Object} contact 
      */
-    renderContact(contact) {
+    renderContact = (contact) => {
         const contactTemplate = Template.contact(contact);
         this.contactListEl.innerHTML += contactTemplate;
     }
@@ -58,7 +58,7 @@ class ContactView {
      * Render contact infomation.
      * @param {Object} contactInfo 
      */
-    renderContactInfo(contactInfo) {
+    renderContactInfo = (contactInfo) => {
         this.infoAvatarEl.setAttribute("src", contactInfo.avatar);
         this.infoNameEl.innerText = `${contactInfo.name}`;
         this.infoRelationEl.innerText = `${contactInfo.relation.name}`;
@@ -81,9 +81,11 @@ class ContactView {
         this.contactListEl.addEventListener("click", (event) => {
             this.contactListEl.querySelector(this.contactEl + ".contact-item--active")?.classList.remove("contact-item--active");
             const el = event.target.closest(this.contactEl);
-            el.classList.add("contact-item--active");
-            const contactId = el.getAttribute("data-id");
-            showInfo(contactId);
+            if (el) {
+                el.classList.add("contact-item--active");
+                const contactId = el.getAttribute("data-id");
+                showInfo(contactId);
+            }
         })
     }
 
@@ -148,8 +150,7 @@ class ContactView {
         this.filterDropDown.addEventListener("change", (event) => {
             const el = event.target.closest("input");
             this.filterParams.filter.relation = el.value;
-            console.log("Filter: ", this.filterParams)
-            filterContact(this.filterParams);
+            filterContact();
         })
     }
 }

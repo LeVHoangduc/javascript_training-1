@@ -5,23 +5,23 @@ class apiRequest {
         this.path = path;
     }
 
-    get(id) {
+    get = (id) => {
         return this.sendRequest(`${this.path}${id ? `/${id}` : ''}`, 'GET');
     }
 
-    post(data) {
+    post = (data) => {
         return this.sendRequest(`${this.path}`, 'POST', data);
     }
 
-    put(id, data) {
+    put = (id, data) => {
         return this.sendRequest(`${this.path}/${id}`, 'PUT', data);
     }
 
-    patch(id, data) {
+    patch = (id, data) => {
         return this.sendRequest(`${this.path}/${id}`, 'PATCH', data);
     }
 
-    delete(id) {
+    delete = (id) => {
         return this.sendRequest(`${this.path}/${id}`, 'DELETE');
     }
 
@@ -29,11 +29,10 @@ class apiRequest {
      * Send the HTTP request to the API_GATEWAY_URL endpoint.
      * @param {String} method 
      * @param {Object} body
-     * @return {Object||Array} response from server.
+     * @return {Object|Array} response from server.
      */
-    async sendRequest(path, method, body) {
+    sendRequest = async (path, method, body) => {
         const url = `${this.baseUrl}${path}`;
-        console.log(url, method, body, this.path);
         try {
             const response = await fetch(url, {
                 method,

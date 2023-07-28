@@ -14,7 +14,7 @@ class Relations {
   /**
    * Initializing the Relations model.
    */
-  async init() {
+  init = async () => {
     const data = await this.service.getRelationList();
     this.relations = this.parseData(data);
   }
@@ -24,14 +24,14 @@ class Relations {
    * @param {Array} data
    * @returns {Array} array of Relation objects.
    */
-  parseData(data) {
+  parseData = (data) => {
     return data.map((item) => new Relation(item));
   }
 
   /**
    * Get list of Relation objects.
    */
-  getRelations() {
+  getRelations = () => {
     return this.relations;
   }
 

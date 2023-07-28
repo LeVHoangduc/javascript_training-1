@@ -14,7 +14,7 @@ class RelationService {
      * Get relation list from database.
      * @returns {Array} relation list.
      */
-    async getRelationList() {
+    getRelationList = async () => {
         const data = await this.apiRequest.get();
         return data
     }

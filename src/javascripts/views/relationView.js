@@ -15,7 +15,7 @@ class RelationView {
      * Render the relation list in adding or editing modal.
      * @param {Array} relations 
      */
-    renderRelationList(relations) {
+    renderRelationList = (relations) => {
         relations.forEach(relation => {
             this.renderRelation(relation);
         })
@@ -25,7 +25,7 @@ class RelationView {
      * Render the relation list in filter dropdown.
      * @param {Array} relations 
      */
-    renderRelationDropdownList(relations) {
+    renderRelationDropdownList = (relations) => {
         relations.forEach(relation => {
             this.renderRelationDropdown(relation);
         })
@@ -35,7 +35,7 @@ class RelationView {
      * Render a relation in relation list in adding or editing modal.
      * @param {Object} relation 
      */
-    renderRelation(relation) {
+    renderRelation = (relation) => {
         const relationTemplate = Template.relation(relation);
         this.relationListEl.innerHTML += relationTemplate;
     }
@@ -44,7 +44,7 @@ class RelationView {
      * Render a relation in relation list in filter dropdown.
      * @param {Object} relation 
      */
-    renderRelationDropdown(relation) {
+    renderRelationDropdown = (relation) => {
         const relationDropDownTemplate = Template.relationDropDown(relation);
         this.relationDropDownEl.innerHTML += relationDropDownTemplate;
     }

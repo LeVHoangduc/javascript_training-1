@@ -21,7 +21,7 @@ class ModalView {
      * @param {String} contactId 
      * @param {Object} contact 
      */
-    async openModal(contactId, contact) {
+    openModal = async (contactId, contact) => {
         this.modalEl.classList.add("modal--active");
         this.overlayEl.classList.add("overlay--active");
         if (contactId) {

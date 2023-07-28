@@ -16,7 +16,7 @@ class Contacts {
   /**
    * Initializing the Contacts model.
    */
-  async init() {
+  init = async () => {
     const data = await this.service.getContactList();
     this.contactList = this.parseData(data);
   }
@@ -26,7 +26,7 @@ class Contacts {
   * @param {Array} data 
   * @returns {Array} array of Contact object.
   */
-  parseData(data) {
+  parseData = (data) => {
     return data.map((item) => new Contact(item));
   }
 
@@ -34,7 +34,7 @@ class Contacts {
    * Initializing the Display list.
    * @param {String} getRelationById 
    */
-  initDisplayList(getRelationById) {
+  initDisplayList = (getRelationById) => {
     this.contactDisplayList = this.contactList.map((contact) => {
       return { ...contact, relation: getRelationById(contact.relation) }
     })
@@ -44,15 +44,15 @@ class Contacts {
   /**
    * Getter and Setter.
    */
-  getContactDisplayList() {
+  getContactDisplayList = () => {
     return this.contactDisplayList;
   }
 
-  getContactInfo() {
+  getContactInfo = () => {
     return this.contactInfo;
   }
 
-  setContactInfo(id) {
+  setContactInfo = (id) => {
     const data = this.contactDisplayList.find(contact => contact.id === id);
     this.contactInfo = new Contact(data);
   }
@@ -62,7 +62,7 @@ class Contacts {
    * @param {String} id 
    * @returns {Object} contact information object.
    */
-  async getContactById(id, getRelationById) {
+  getContactById = async (id, getRelationById) => {
     const data = await this.service.getContactById(id);
     this.contactInfo = new Contact({ ...data, relation: getRelationById(data.relation) });
     return this.contactInfo;
@@ -72,7 +72,7 @@ class Contacts {
    * Add contact to contact list and database.
    * @param {Object} data 
    */
-  async addContact(data) {
+  addContact = async (data) => {
     const contact = new Contact(data);
     this.contactList.push(contact);
     await this.service.addContact(contact);
@@ -82,7 +82,7 @@ class Contacts {
    * Update contact in contact list and database.
    * @param {Object} data 
    */
-  async editContact(data) {
+  editContact = async (data) => {
     const contact = new Contact(data);
     await this.service.editContact(contact);
     this.contactList = this.contactList.map((item) => {
@@ -97,7 +97,7 @@ class Contacts {
    * Delete contact from contact list and database.
    * @param {String} id 
    */
-  async deleteContactById(id) {
+  deleteContactById = async (id) => {
     await this.service.deleteContactById(id);
     this.contactList = this.contactList.filter((item) => item.id !== id);
     this.contactInfo = this.contactDisplayList[0];
@@ -107,7 +107,7 @@ class Contacts {
    * Filter and search contact in contact displaying list.
    * @param {Object} params
    */
-  filterDisplayList(params) {
+  filterDisplayList = (params) => {
     const { filter, searchKey } = params;
     this.contactDisplayList = this.contactDisplayList.filter((contact) => {
       let isMatchFilter = true;
