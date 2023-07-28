@@ -1,4 +1,4 @@
-class apiRequest {
+class ApiRequest {
 
     constructor(baseUrl, path) {
         this.baseUrl = baseUrl;
@@ -53,4 +53,4 @@ class apiRequest {
     }
 }
 
-export default apiRequest;
+export default ApiRequest;

@@ -1,5 +1,5 @@
 import { API_GATEWAY_URL } from "../constants/urls";
-import apiRequest from "../helpers/apiRequest";
+import ApiRequest from "../helpers/apiRequest";
 
 class RelationService {
 
@@ -7,7 +7,7 @@ class RelationService {
      * Constructor of Relation Service object.
      */
     constructor() {
-        this.apiRequest = new apiRequest(API_GATEWAY_URL, '/relations');
+        this.apiRequest = new ApiRequest(API_GATEWAY_URL, '/relations');
     }
 
     /**

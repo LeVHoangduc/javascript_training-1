@@ -1,5 +1,5 @@
 import { API_GATEWAY_URL } from "../constants/urls";
-import apiRequest from "../helpers/apiRequest";
+import ApiRequest from "../helpers/apiRequest";
 
 class ContactService {
 
@@ -7,7 +7,7 @@ class ContactService {
    * Constructor of Contact Service object.
    */
   constructor() {
-    this.apiRequest = new apiRequest(API_GATEWAY_URL, '/contacts');
+    this.apiRequest = new ApiRequest(API_GATEWAY_URL, '/contacts');
   }
 
   /**
