@@ -47,7 +47,7 @@
   text-align: center;
 }
 
-.info__body__contact {
+.detail {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +56,7 @@
   width: 100%;
 }
 
-.detail {
+.detail__line {
   width: 100%;
   max-width: 328px;
   display: flex;
@@ -79,11 +79,11 @@
   justify-content: center;
 }
 
-.detail--phone .detail__right {
+.detail__line--phone .detail__right {
   background-color: rgba(137, 242, 166, 0.66);
 }
 
-.detail--mail .detail__right {
+.detail__line--email .detail__right {
   background-color: rgba(242, 225, 137, 0.66);
 }
 

@@ -1,23 +1,23 @@
 import { API_GATEWAY_URL } from "../constants/urls";
-import apiRequest from "../helpers/api-request";
+import apiRequest from "../helpers/apiRequest";
 
-class relationService {
+class RelationService {
 
     /**
      * Constructor of Relation Service object.
      */
     constructor() {
-        this.apiRequest = new apiRequest(API_GATEWAY_URL);
-        this.path = '/relations'
+        this.apiRequest = new apiRequest(API_GATEWAY_URL, '/relations');
     }
 
     /**
      * Get relation list from database.
+     * @returns {Array} relation list.
      */
     async getRelationList() {
-        const data = await this.apiRequest.get(this.path);
+        const data = await this.apiRequest.get();
         return data
     }
 }
 
-export default relationService;
+export default RelationService;

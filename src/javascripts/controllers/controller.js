@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+import errorHandle from '../helpers/errorHandler';
 class Controller {
   /**
    * Constructor of Controller object
@@ -24,14 +26,14 @@ class Controller {
    * Initializing the contact list and contact information.
    */
   async initContacts() {
-    await this.model.contact.init();
+    await errorHandle(this.model.contact.init(), "Couldn't initialize contact list");
     this.loadListContacts();
     this.showInfo();
     this.view.contact.addEventEditContact(this.editContact);
     this.view.contact.addEventDeleteContact(this.confirmDelete);
     this.view.contact.addEventAddContact(this.addContact);
     this.view.contact.addDelegateShowInfo(this.showInfo);
-    this.view.contact.addEventSearchContact(this.searchContact);
+    this.view.contact.addEventSearchContact(this.filterContact);
     this.view.contact.addEventShowFilterOptions();
     this.view.contact.addDelegateFilterContact(this.filterContact);
   }
@@ -41,14 +43,9 @@ class Controller {
    */
   loadListContacts = () => {
     this.model.contact.initDisplayList(this.model.relation.getRelationById);
-    this.model.contact.filterDisplayList();
+    this.model.contact.filterDisplayList(this.view.contact.filterParams);
     const contacts = this.model.contact.getContactDisplayList();
-    try {
-      this.view.contact.renderContactList(contacts);
-    } catch (err) {
-      alert(`Couldn't render contact list
-      Error message: ${err.message}`);
-    }
+    errorHandle(this.view.contact.renderContactList(contacts), "Couldn't render contact list")
   }
 
   /**
@@ -58,13 +55,8 @@ class Controller {
   showInfo = async (contactId) => {
     if (contactId) this.model.contact.setContactInfo(contactId);
     const contactInfo = this.model.contact.getContactInfo();
-    console.log(contactInfo);
-    try {
-      this.view.contact.renderContactInfo(contactInfo)
-    }
-    catch (err) {
-      alert(`Couldn't render contact info
-      Error message: ${err.message}`)
+    if (contactInfo) {
+      errorHandle(this.view.contact.renderContactInfo(contactInfo), "Couldn't render contact info");
     }
   }
 
@@ -73,15 +65,15 @@ class Controller {
    * @param {string} contactId 
    */
   confirmDelete = async (contactId) => {
-    const contact = await this.model.contact.getContactById(contactId);
-    this.view.modal.renderConfirmModal(contact);
+    const contact = await errorHandle(this.model.contact.getContactById(contactId, this.model.relation.getRelationById), "Couldn't get contact information");
+    errorHandle(this.view.modal.openConfirmModal(contact), "Couldn't open confirm modal");
   }
 
   /**
    * Show a modal when click add contact.
    */
   addContact = () => {
-    this.view.modal.renderModal();
+    errorHandle(this.view.modal.openModal(), "Couldn't open add modal");
   }
 
   /**
@@ -89,7 +81,7 @@ class Controller {
    * @param {string} contactId 
    */
   deleteContact = async (contactId) => {
-    await this.model.contact.deleteContactById(contactId);
+    await errorHandle(this.model.contact.deleteContactById(contactId), "Couldn't delete contact");
     this.loadListContacts();
     this.showInfo();
   }
@@ -99,33 +91,16 @@ class Controller {
    * @param {string} contactId 
    */
   editContact = async (contactId) => {
-    const contact = await this.model.contact.getContactById(contactId);
-    this.view.modal.renderModal(contactId, contact);
+    const contact = await errorHandle(this.model.contact.getContactById(contactId, this.model.relation.getRelationById), "Couldn't get contact information");
+    errorHandle(this.view.modal.openModal(contactId, contact), "Couldn't open edit modal");
   }
 
   /**
    * Display the result while searching in contact list.
-   * @param {string} searchKey 
+   * @param {Object} filterParams
    */
-  searchContact = (searchKey) => {
-    this.model.contact.initDisplayList(this.model.relation.getRelationById);
-    this.model.contact.setSearchKey(searchKey);
-    this.model.contact.filterDisplayList();
-    const result = this.model.contact.getContactDisplayList();
-    this.view.contact.renderContactList(result);
-    this.showInfo();
-  }
-
-  /**
-   * Display the result while filtering contact list. 
-   * @param {string} relation 
-   */
-  filterContact = (relation) => {
-    this.model.contact.initDisplayList(this.model.relation.getRelationById);
-    this.model.contact.setFilterOpt(relation);
-    this.model.contact.filterDisplayList();
-    const result = this.model.contact.getContactDisplayList();
-    this.view.contact.renderContactList(result);
+  filterContact = (filterParams) => {
+    this.loadListContacts();
     this.showInfo();
   }
 
@@ -135,7 +110,6 @@ class Controller {
    */
   saveContact = async (contact) => {
     if (!contact.id) {
-      const { v4: uuidv4 } = require("uuid");
       contact = {
         id: uuidv4(),
         name: contact.name,
@@ -144,9 +118,9 @@ class Controller {
         email: contact.email,
         avatar: contact.avatar,
       }
-      await this.model.contact.addContact(contact);
+      await errorHandle(this.model.contact.addContact(contact), "Couldn't add contact");
     } else {
-      await this.model.contact.editContact(contact);
+      await errorHandle(this.model.contact.editContact(contact), "Couldn't edit contact");
     }
     this.loadListContacts();
     this.showInfo(contact.id);
@@ -158,8 +132,8 @@ class Controller {
    * Initializing the relation lists.
    */
   async initRelations() {
-    await this.model.relation.init();
-    const relations = await this.model.relation.getRelations();
+    await errorHandle(this.model.relation.init(), "Couldn't initialize relation list")
+    const relations = this.model.relation.getRelations();
     this.view.relation.renderRelationList(relations);
     this.view.relation.renderRelationDropdownList(relations);
   }
@@ -170,9 +144,11 @@ class Controller {
    * Initializing the modals.
    */
   async initModal() {
-    this.view.modal.addEventCancelModal();
     this.view.modal.addEventSubmission(this.saveContact);
     this.view.modal.addEventDeleteConfirmed(this.deleteContact);
+    this.view.modal.addEventCancelModal();
+    this.view.modal.addEventCancelConfirmed();
+    this.view.modal.addEventClickOutside();
   }
 
 }

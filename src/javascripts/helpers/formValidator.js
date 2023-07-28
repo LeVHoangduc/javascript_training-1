@@ -3,6 +3,7 @@ import { MESSAGE, REGEX } from "../constants/constants";
 /**
  * Form validator check if the information is valid.
  * @param {Object} contact 
+ * @returns {Boolean} is the form valid.
  */
 const formValidator = (contact) => {
     const modalEl = document.querySelector(".modal");

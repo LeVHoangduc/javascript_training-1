@@ -1,37 +1,39 @@
 class apiRequest {
 
-    constructor(baseUrl) {
+    constructor(baseUrl, path) {
         this.baseUrl = baseUrl;
+        this.path = path;
     }
 
-    get(path, id) {
-        return this.sendRequest(`${path}${id ? `/${id}` : ''}`, 'GET');
+    get(id) {
+        return this.sendRequest(`${this.path}${id ? `/${id}` : ''}`, 'GET');
     }
 
-    post(path, data) {
-        return this.sendRequest(`${path}`, 'POST', data);
+    post(data) {
+        return this.sendRequest(`${this.path}`, 'POST', data);
     }
 
-    put(path, id, data) {
-        return this.sendRequest(`${path}/${id}`, 'PUT', data);
+    put(id, data) {
+        return this.sendRequest(`${this.path}/${id}`, 'PUT', data);
     }
 
-    patch(path, id, data) {
-        return this.sendRequest(`${path}/${id}`, 'PATCH', data);
+    patch(id, data) {
+        return this.sendRequest(`${this.path}/${id}`, 'PATCH', data);
     }
 
-    delete(path, id) {
-        return this.sendRequest(`${path}/${id}`, 'DELETE');
+    delete(id) {
+        return this.sendRequest(`${this.path}/${id}`, 'DELETE');
     }
 
     /**
-     * Send the HTTP request to the API_GATEWAY_URL endpoint
-     * @param {String} path 
+     * Send the HTTP request to the API_GATEWAY_URL endpoint.
      * @param {String} method 
-     * @param {object} body 
+     * @param {Object} body
+     * @return {Object||Array} response from server.
      */
     async sendRequest(path, method, body) {
         const url = `${this.baseUrl}${path}`;
+        console.log(url, method, body, this.path);
         try {
             const response = await fetch(url, {
                 method,
@@ -46,7 +48,6 @@ class apiRequest {
                 throw new Error('Error while sending request');
             }
         } catch (error) {
-            alert(`${error.message}: '${method}' from API_GATEWAY_URL${path}`);
             throw error;
         }
 

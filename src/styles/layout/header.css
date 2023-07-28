@@ -43,7 +43,7 @@
 
   width: 25px;
   height: 25px;
-  background-image: url("../../assets/icons/search-icon.svg");
+  background-image: url('../../assets/icons/search-icon.svg');
 }
 
 .features__filter {
@@ -56,8 +56,11 @@
   width: 40px;
 }
 
+.features__filter > .btn > img {
+  transition: transform 0.2s ease;
+}
+
 .rot-90 {
-  transition: transform 0.5s ease;
   transform: rotate(90deg);
 }
 

@@ -1,4 +1,4 @@
-import relationService from "../services/relationService";
+import RelationService from "../services/relationService";
 import Relation from "./relation";
 
 class Relations {
@@ -7,7 +7,7 @@ class Relations {
    * Constructor of Relations object.
    */
   constructor() {
-    this.service = new relationService;
+    this.service = new RelationService;
     this.relations;
   }
 
@@ -16,14 +16,15 @@ class Relations {
    */
   async init() {
     const data = await this.service.getRelationList();
-    this.relations = await this.parseData(data);
+    this.relations = this.parseData(data);
   }
 
   /**
    * Parsing data from array to array of Relation object.
    * @param {Array} data
+   * @returns {Array} array of Relation objects.
    */
-  async parseData(data) {
+  parseData(data) {
     return data.map((item) => new Relation(item));
   }
 
@@ -37,6 +38,7 @@ class Relations {
   /**
    * Get relation object by ID.
    * @param {String} id 
+   * @returns {Object} a relation object.
    */
   getRelationById = (id) => {
     return this.relations.find((relation) => relation.id === id);

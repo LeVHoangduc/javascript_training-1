@@ -4,9 +4,15 @@ class ContactView {
      * Constructor of ContactView object
      */
     constructor() {
+        this.filterParams = {
+            searchKey: "",
+            filter: {
+                relation: "0"
+            }
+        };
+
         this.contactListEl = document.querySelector(".contacts__list");
         this.infoEl = document.querySelector(".info");
-        this.contactEl = ".contact-item";
         this.addBtnEl = document.querySelector(".features__add");
         this.searchInputEl = document.querySelector(".features__search__input");
         this.filterBtnEl = document.querySelector(".features__filter > button");
@@ -16,11 +22,15 @@ class ContactView {
         this.infoNameEl = this.infoEl.querySelector(".info__head__name");
         this.infoRelationEl = this.infoEl.querySelector(".info__head__relation");
         this.infoPhoneEl = this.infoEl.querySelector(".detail__phone");
+        this.infoPhoneIconEl = this.infoEl.querySelector(".detail__line--phone > .detail__right");
         this.infoEmailEl = this.infoEl.querySelector(".detail__email");
+        this.infoEmailIconEl = this.infoEl.querySelector(".detail__line--email > .detail__right");
         this.infoGrpBtnEl = this.infoEl.querySelector(".info__buttons");
         this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
         this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
     }
+
+    contactEl = ".contact-item";
 
     //----- RENDERING -----//
 
@@ -54,8 +64,10 @@ class ContactView {
         this.infoRelationEl.innerText = `${contactInfo.relation.name}`;
         this.infoPhoneEl.innerText = `${contactInfo.phone}`;
         this.infoPhoneEl.setAttribute("href", `tel:${contactInfo.phone}`);
+        this.infoPhoneIconEl.setAttribute("href", `tel:${contactInfo.phone}`);
         this.infoEmailEl.innerText = `${contactInfo.email}`;
         this.infoEmailEl.setAttribute("href", `mailto:${contactInfo.email}`);
+        this.infoEmailIconEl.setAttribute("href", `mailto:${contactInfo.email}`);
         this.infoGrpBtnEl.setAttribute("data-id", contactInfo.id);
     }
 
@@ -67,7 +79,7 @@ class ContactView {
      */
     addDelegateShowInfo = (showInfo) => {
         this.contactListEl.addEventListener("click", (event) => {
-            this.contactListEl.querySelectorAll(this.contactEl).forEach((contactEl) => contactEl.classList.remove("contact-item--active"))
+            this.contactListEl.querySelector(this.contactEl + ".contact-item--active")?.classList.remove("contact-item--active");
             const el = event.target.closest(this.contactEl);
             el.classList.add("contact-item--active");
             const contactId = el.getAttribute("data-id");
@@ -111,9 +123,10 @@ class ContactView {
      * Add event listener searching contacts to the search input.
      * @param {Function} searchContact 
      */
-    addEventSearchContact = (searchContact) => {
+    addEventSearchContact = (filterContact) => {
         this.searchInputEl.addEventListener("keyup", (event) => {
-            searchContact(event.target.value);
+            this.filterParams.searchKey = event.target.value.toLowerCase();
+            filterContact(this.filterParams);
         });
     }
 
@@ -121,7 +134,7 @@ class ContactView {
      * Add event listenter showing filter options to the filter button.
      */
     addEventShowFilterOptions = () => {
-        this.filterBtnEl.addEventListener("click", (event) => {
+        this.filterBtnEl.addEventListener("click", () => {
             this.filterBtnEl.querySelector("img").classList.toggle("rot-90");
             this.filterDropDown.classList.toggle("relation-dropdown--active")
         });
@@ -134,8 +147,9 @@ class ContactView {
     addDelegateFilterContact = (filterContact) => {
         this.filterDropDown.addEventListener("change", (event) => {
             const el = event.target.closest("input");
-            const relation = el.value;
-            filterContact(relation);
+            this.filterParams.filter.relation = el.value;
+            console.log("Filter: ", this.filterParams)
+            filterContact(this.filterParams);
         })
     }
 }
