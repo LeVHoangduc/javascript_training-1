@@ -1,4 +1,4 @@
-import contactService from "../services/contactService";
+import ContactService from "../services/contactService";
 import Contact from "./contact"
 
 class Contacts {
@@ -6,29 +6,35 @@ class Contacts {
    * Constructor of Contacts object.
    */
   constructor() {
-    this.service = new contactService();
+    this.service = new ContactService();
 
     this.contactList; // List of contacts.
     this.contactDisplayList; // List of contact for displaying.
     this.contactInfo; // Contact information for displaying.
-
-    this.searchKey; //Search key.
-    this.filterOpt; // Filter options.
   }
 
   /**
    * Initializing the Contacts model.
    */
-  async init() {
+  init = async () => {
     const data = await this.service.getContactList();
     this.contactList = this.parseData(data);
+  }
+
+  /**
+  * Parse the data array to array of Contact object.
+  * @param {Array} data 
+  * @returns {Array} array of Contact object.
+  */
+  parseData = (data) => {
+    return data.map((item) => new Contact(item));
   }
 
   /**
    * Initializing the Display list.
    * @param {String} getRelationById 
    */
-  initDisplayList(getRelationById) {
+  initDisplayList = (getRelationById) => {
     this.contactDisplayList = this.contactList.map((contact) => {
       return { ...contact, relation: getRelationById(contact.relation) }
     })
@@ -36,45 +42,29 @@ class Contacts {
   }
 
   /**
-   * Parse the data array to array of Contact object.
-   * @param {Array} data 
-   */
-  parseData(data) {
-    console.log(data);
-    return data.map((item) => new Contact(item));
-  }
-
-  /**
    * Getter and Setter.
    */
-  getContactDisplayList() {
+  getContactDisplayList = () => {
     return this.contactDisplayList;
   }
 
-  getContactInfo() {
+  getContactInfo = () => {
     return this.contactInfo;
   }
 
-  setContactInfo(id) {
+  setContactInfo = (id) => {
     const data = this.contactDisplayList.find(contact => contact.id === id);
     this.contactInfo = new Contact(data);
-  }
-
-  setSearchKey(searchKey) {
-    this.searchKey = searchKey.toLowerCase();
-  }
-
-  setFilterOpt(filterOpt) {
-    this.filterOpt = filterOpt;
   }
 
   /**
    * Get contact infomation by ID.
    * @param {String} id 
+   * @returns {Object} contact information object.
    */
-  async getContactById(id) {
-    const data = this.contactDisplayList.find(contact => contact.id === id);
-    this.contactInfo = new Contact(data);
+  getContactById = async (id, getRelationById) => {
+    const data = await this.service.getContactById(id);
+    this.contactInfo = new Contact({ ...data, relation: getRelationById(data.relation) });
     return this.contactInfo;
   }
 
@@ -82,7 +72,7 @@ class Contacts {
    * Add contact to contact list and database.
    * @param {Object} data 
    */
-  async addContact(data) {
+  addContact = async (data) => {
     const contact = new Contact(data);
     this.contactList.push(contact);
     await this.service.addContact(contact);
@@ -92,7 +82,7 @@ class Contacts {
    * Update contact in contact list and database.
    * @param {Object} data 
    */
-  async editContact(data) {
+  editContact = async (data) => {
     const contact = new Contact(data);
     await this.service.editContact(contact);
     this.contactList = this.contactList.map((item) => {
@@ -107,7 +97,7 @@ class Contacts {
    * Delete contact from contact list and database.
    * @param {String} id 
    */
-  async deleteContactById(id) {
+  deleteContactById = async (id) => {
     await this.service.deleteContactById(id);
     this.contactList = this.contactList.filter((item) => item.id !== id);
     this.contactInfo = this.contactDisplayList[0];
@@ -115,17 +105,24 @@ class Contacts {
 
   /**
    * Filter and search contact in contact displaying list.
+   * @param {Object} params
    */
-  filterDisplayList() {
-    this.contactDisplayList = this.contactDisplayList
-      .filter((contact) => {
-        if (this.filterOpt === "0" || !this.filterOpt) return true;
-        else return contact.relation.id === this.filterOpt
-      })
-      .filter((contact) => {
-        if (!this.searchKey) return true;
-        else return contact.name.toLowerCase().includes(this.searchKey) || contact.phone.includes(this.searchKey) || contact.email.includes(this.searchKey)
-      })
+  filterDisplayList = (params) => {
+    const { filter, searchKey } = params;
+    this.contactDisplayList = this.contactDisplayList.filter((contact) => {
+      let isMatchFilter = true;
+      let isMatchSearch = true;
+      // Match with filter
+      if (filter.relation !== "0") {
+        isMatchFilter = contact.relation.id === filter.relation;
+      }
+      // Match with search key
+      if (searchKey) {
+        const fields = ['name', 'phone', 'email'];
+        isMatchSearch = fields.some(field => contact[field].toString().toLowerCase().includes(searchKey));
+      }
+      return isMatchFilter && isMatchSearch;
+    });
     this.contactInfo = this.contactDisplayList[0];
   }
 }

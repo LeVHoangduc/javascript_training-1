@@ -1,30 +1,31 @@
 import { API_GATEWAY_URL } from "../constants/urls";
-import apiRequest from "../helpers/api-request";
+import ApiRequest from "../helpers/apiRequest";
 
-class contactService {
+class ContactService {
 
   /**
    * Constructor of Contact Service object.
    */
   constructor() {
-    this.apiRequest = new apiRequest(API_GATEWAY_URL);
-    this.path = '/contacts';
+    this.apiRequest = new ApiRequest(API_GATEWAY_URL, '/contacts');
   }
 
   /**
    * Get contact list from database.
+   * @returns {Array} Contact list
    */
-  async getContactList() {
-    const data = await this.apiRequest.get(this.path);
+  getContactList = async () => {
+    const data = await this.apiRequest.get();
     return data;
   }
 
   /**
    * Get contact by Id from database.
    * @param {String} id 
+   * @returns {Object} Contact object
    */
-  async getContactbyId(id) {
-    const data = await this.apiRequest.get(this.path, id);
+  getContactById = async (id) => {
+    const data = await this.apiRequest.get(id);
     return data;
   }
 
@@ -32,25 +33,25 @@ class contactService {
    * Add contact to database.
    * @param {Object} contact 
    */
-  async addContact(contact) {
-    await this.apiRequest.post(this.path, contact);
+  addContact = async (contact) => {
+    await this.apiRequest.post(contact);
   }
 
   /**
    * Edit contact from database.
    * @param {Object} contact 
    */
-  async editContact(contact) {
-    await this.apiRequest.patch(this.path, contact.id, contact);
+  editContact = async (contact) => {
+    await this.apiRequest.patch(contact.id, contact);
   }
 
   /**
    * Delete contact from database.
    * @param {String} id 
    */
-  async deleteContactById(id) {
-    await this.apiRequest.delete(this.path, id);
+  deleteContactById = async (id) => {
+    await this.apiRequest.delete(id);
   }
 }
 
-export default contactService;
+export default ContactService;

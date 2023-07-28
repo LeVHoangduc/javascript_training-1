@@ -6,21 +6,20 @@ class ContactView {
     constructor() {
         this.contactListEl = document.querySelector(".contacts__list");
         this.infoEl = document.querySelector(".info");
-        this.contactEl = ".contact-item";
         this.addBtnEl = document.querySelector(".features__add");
         this.searchInputEl = document.querySelector(".features__search__input");
         this.filterBtnEl = document.querySelector(".features__filter > button");
         this.filterDropDown = document.querySelector(".relation-dropdown");
-
-        this.infoAvatarEl = this.infoEl.querySelector(".info__head__avatar > img");
-        this.infoNameEl = this.infoEl.querySelector(".info__head__name");
-        this.infoRelationEl = this.infoEl.querySelector(".info__head__relation");
-        this.infoPhoneEl = this.infoEl.querySelector(".detail__phone");
-        this.infoEmailEl = this.infoEl.querySelector(".detail__email");
-        this.infoGrpBtnEl = this.infoEl.querySelector(".info__buttons");
-        this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
-        this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
     }
+
+    contactEl = ".contact-item";
+
+    filterParams = {
+        searchKey: "",
+        filter: {
+            relation: "0"
+        }
+    };
 
     //----- RENDERING -----//
 
@@ -28,7 +27,7 @@ class ContactView {
      * Display the contact list.
      * @param {Array} contacts 
      */
-    renderContactList(contacts) {
+    renderContactList = (contacts) => {
         this.contactListEl.innerHTML = "";
         contacts.forEach(contact => {
             this.renderContact(contact);
@@ -39,8 +38,8 @@ class ContactView {
      * Render a contact in contact list.
      * @param {Object} contact 
      */
-    renderContact(contact) {
-        const contactTemplate = Template.contact(contact);
+    renderContact = (contact) => {
+        const contactTemplate = Template.renderContact(contact);
         this.contactListEl.innerHTML += contactTemplate;
     }
 
@@ -48,15 +47,16 @@ class ContactView {
      * Render contact infomation.
      * @param {Object} contactInfo 
      */
-    renderContactInfo(contactInfo) {
-        this.infoAvatarEl.setAttribute("src", contactInfo.avatar);
-        this.infoNameEl.innerText = `${contactInfo.name}`;
-        this.infoRelationEl.innerText = `${contactInfo.relation.name}`;
-        this.infoPhoneEl.innerText = `${contactInfo.phone}`;
-        this.infoPhoneEl.setAttribute("href", `tel:${contactInfo.phone}`);
-        this.infoEmailEl.innerText = `${contactInfo.email}`;
-        this.infoEmailEl.setAttribute("href", `mailto:${contactInfo.email}`);
-        this.infoGrpBtnEl.setAttribute("data-id", contactInfo.id);
+    renderContactInfo = (contactInfo, confirmDelete, editContact) => {
+        if (contactInfo) {
+            this.infoEl.innerHTML = Template.renderContactInfo(contactInfo);
+            this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
+            this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
+            this.addEventDeleteContact(this.deleteBtnEl, confirmDelete);
+            this.addEventEditContact(this.editBtnEl, editContact);
+        } else {
+            this.infoEl.innerHTML = "";
+        }
     }
 
     //----- EVENT HANDLER -----//
@@ -67,11 +67,13 @@ class ContactView {
      */
     addDelegateShowInfo = (showInfo) => {
         this.contactListEl.addEventListener("click", (event) => {
-            this.contactListEl.querySelectorAll(this.contactEl).forEach((contactEl) => contactEl.classList.remove("contact-item--active"))
+            this.contactListEl.querySelector(this.contactEl + ".contact-item--active")?.classList.remove("contact-item--active");
             const el = event.target.closest(this.contactEl);
-            el.classList.add("contact-item--active");
-            const contactId = el.getAttribute("data-id");
-            showInfo(contactId);
+            if (el) {
+                el.classList.add("contact-item--active");
+                const contactId = el.getAttribute("data-id");
+                showInfo(contactId);
+            }
         })
     }
 
@@ -89,8 +91,8 @@ class ContactView {
      * Add event listener deleting a contact action to the delete contact button.
      * @param {Function} confirmDelete 
      */
-    addEventDeleteContact = (confirmDelete) => {
-        this.deleteBtnEl.addEventListener("click", (event) => {
+    addEventDeleteContact = (el, confirmDelete) => {
+        el.addEventListener("click", (event) => {
             const contactId = event.target.parentNode.getAttribute("data-id");
             confirmDelete(contactId);
         })
@@ -100,8 +102,8 @@ class ContactView {
      * Add event listener editing a contact action to the edit contact button.
      * @param {Function} editContact 
      */
-    addEventEditContact = (editContact) => {
-        this.editBtnEl.addEventListener("click", (event) => {
+    addEventEditContact = (el, editContact) => {
+        el.addEventListener("click", (event) => {
             const contactId = event.target.parentNode.getAttribute("data-id");
             editContact(contactId);
         })
@@ -111,9 +113,10 @@ class ContactView {
      * Add event listener searching contacts to the search input.
      * @param {Function} searchContact 
      */
-    addEventSearchContact = (searchContact) => {
+    addEventSearchContact = (filterContact) => {
         this.searchInputEl.addEventListener("keyup", (event) => {
-            searchContact(event.target.value);
+            this.filterParams.searchKey = event.target.value.toLowerCase();
+            filterContact(this.filterParams);
         });
     }
 
@@ -121,7 +124,7 @@ class ContactView {
      * Add event listenter showing filter options to the filter button.
      */
     addEventShowFilterOptions = () => {
-        this.filterBtnEl.addEventListener("click", (event) => {
+        this.filterBtnEl.addEventListener("click", () => {
             this.filterBtnEl.querySelector("img").classList.toggle("rot-90");
             this.filterDropDown.classList.toggle("relation-dropdown--active")
         });
@@ -134,8 +137,8 @@ class ContactView {
     addDelegateFilterContact = (filterContact) => {
         this.filterDropDown.addEventListener("change", (event) => {
             const el = event.target.closest("input");
-            const relation = el.value;
-            filterContact(relation);
+            this.filterParams.filter.relation = el.value;
+            filterContact();
         })
     }
 }

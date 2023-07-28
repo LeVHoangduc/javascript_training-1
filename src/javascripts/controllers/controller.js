@@ -1,8 +1,10 @@
+import { v4 as uuidv4 } from 'uuid';
+import { ERROR_MESSAGE } from '../constants/constants';
 class Controller {
   /**
    * Constructor of Controller object
-   * @param {object} model
-   * @param {object} view
+   * @param {Object} model
+   * @param {Object} view
    */
   constructor(model, view) {
     this.model = model;
@@ -12,7 +14,7 @@ class Controller {
   /**
    * Initializing the controller
    */
-  async init() {
+  init = async () => {
     await this.initRelations();
     await this.initContacts();
     this.initModal();
@@ -23,15 +25,17 @@ class Controller {
   /**
    * Initializing the contact list and contact information.
    */
-  async initContacts() {
-    await this.model.contact.init();
+  initContacts = async () => {
+    try {
+      await this.model.contact.init();
+    } catch {
+      alert(ERROR_MESSAGE.INIT_CONTACT_LIST);
+    };
     this.loadListContacts();
     this.showInfo();
-    this.view.contact.addEventEditContact(this.editContact);
-    this.view.contact.addEventDeleteContact(this.confirmDelete);
     this.view.contact.addEventAddContact(this.addContact);
     this.view.contact.addDelegateShowInfo(this.showInfo);
-    this.view.contact.addEventSearchContact(this.searchContact);
+    this.view.contact.addEventSearchContact(this.filterContact);
     this.view.contact.addEventShowFilterOptions();
     this.view.contact.addDelegateFilterContact(this.filterContact);
   }
@@ -41,101 +45,104 @@ class Controller {
    */
   loadListContacts = () => {
     this.model.contact.initDisplayList(this.model.relation.getRelationById);
-    this.model.contact.filterDisplayList();
+    this.model.contact.filterDisplayList(this.view.contact.filterParams);
     const contacts = this.model.contact.getContactDisplayList();
     try {
       this.view.contact.renderContactList(contacts);
-    } catch (err) {
-      alert(`Couldn't render contact list
-      Error message: ${err.message}`);
+    } catch {
+      alert(ERROR_MESSAGE.RENDER_CONTACT_LIST);
     }
   }
 
   /**
    * Display the contact information by contact's id or by default.
-   * @param {string} contactId 
+   * @param {String} contactId 
    */
   showInfo = async (contactId) => {
     if (contactId) this.model.contact.setContactInfo(contactId);
     const contactInfo = this.model.contact.getContactInfo();
-    console.log(contactInfo);
     try {
-      this.view.contact.renderContactInfo(contactInfo)
-    }
-    catch (err) {
-      alert(`Couldn't render contact info
-      Error message: ${err.message}`)
+      this.view.contact.renderContactInfo(contactInfo, this.confirmDelete, this.editContact);
+    } catch {
+      alert(ERROR_MESSAGE.RENDER_CONTACT_INFO);
     }
   }
 
   /**
    * Show the confirm modal when delete a contact.
-   * @param {string} contactId 
+   * @param {String} contactId 
    */
   confirmDelete = async (contactId) => {
-    const contact = await this.model.contact.getContactById(contactId);
-    this.view.modal.renderConfirmModal(contact);
+    let contact;
+    try {
+      contact = await this.model.contact.getContactById(contactId, this.model.relation.getRelationById);
+    } catch {
+      alert(ERROR_MESSAGE.GET_CONTACT_INFO)
+    }
+    try {
+      this.view.modal.openConfirmModal(contact);
+    } catch {
+      alert(ERROR_MESSAGE.OPEN_CONFIRM_MODAL);
+    }
   }
 
   /**
    * Show a modal when click add contact.
    */
   addContact = () => {
-    this.view.modal.renderModal();
+    try {
+      this.view.modal.openModal();
+    } catch {
+      alert(ERROR_MESSAGE.OPEN_ADD_MODAL);
+    }
   }
 
   /**
    * Delete a contact by ID action.
-   * @param {string} contactId 
+   * @param {String} contactId 
    */
   deleteContact = async (contactId) => {
-    await this.model.contact.deleteContactById(contactId);
+    try {
+      await this.model.contact.deleteContactById(contactId);
+    } catch {
+      alert(ERROR_MESSAGE.DELETE_CONTACT);
+    }
     this.loadListContacts();
     this.showInfo();
   }
 
   /**
    * Show a modal for editing when click edit contact.
-   * @param {string} contactId 
+   * @param {String} contactId 
    */
   editContact = async (contactId) => {
-    const contact = await this.model.contact.getContactById(contactId);
-    this.view.modal.renderModal(contactId, contact);
+    let contact;
+    try {
+      contact = await this.model.contact.getContactById(contactId, this.model.relation.getRelationById)
+    } catch {
+      alert(ERROR_MESSAGE.GET_CONTACT_INFO);
+    }
+    try {
+      this.view.modal.openModal(contactId, contact)
+    } catch {
+      alert(ERROR_MESSAGE.OPEN_EDIT_MODAL);
+    }
   }
 
   /**
    * Display the result while searching in contact list.
-   * @param {string} searchKey 
    */
-  searchContact = (searchKey) => {
-    this.model.contact.initDisplayList(this.model.relation.getRelationById);
-    this.model.contact.setSearchKey(searchKey);
-    this.model.contact.filterDisplayList();
-    const result = this.model.contact.getContactDisplayList();
-    this.view.contact.renderContactList(result);
-    this.showInfo();
-  }
-
-  /**
-   * Display the result while filtering contact list. 
-   * @param {string} relation 
-   */
-  filterContact = (relation) => {
-    this.model.contact.initDisplayList(this.model.relation.getRelationById);
-    this.model.contact.setFilterOpt(relation);
-    this.model.contact.filterDisplayList();
-    const result = this.model.contact.getContactDisplayList();
-    this.view.contact.renderContactList(result);
+  filterContact = () => {
+    this.loadListContacts();
     this.showInfo();
   }
 
   /**
    * Add or edit a contact and display the new contact list.
-   * @param {object} contact 
+   * @param {Object} contact 
    */
   saveContact = async (contact) => {
     if (!contact.id) {
-      const { v4: uuidv4 } = require("uuid");
       contact = {
         id: uuidv4(),
         name: contact.name,
@@ -144,9 +151,17 @@ class Controller {
         email: contact.email,
         avatar: contact.avatar,
       }
-      await this.model.contact.addContact(contact);
+      try {
+        await this.model.contact.addContact(contact);
+      } catch {
+        alert(ERROR_MESSAGE.ADD_CONTACT)
+      }
     } else {
-      await this.model.contact.editContact(contact);
+      try {
+        await this.model.contact.editContact(contact)
+      } catch {
+        alert(ERROR_MESSAGE.EDIT_CONTACT)
+      }
     }
     this.loadListContacts();
     this.showInfo(contact.id);
@@ -157,9 +172,13 @@ class Controller {
   /**
    * Initializing the relation lists.
    */
-  async initRelations() {
-    await this.model.relation.init();
-    const relations = await this.model.relation.getRelations();
+  initRelations = async () => {
+    try {
+      await this.model.relation.init();
+    } catch {
+      alert(ERROR_MESSAGE.INIT_RELATION_LIST);
+    };
+    const relations = this.model.relation.getRelations();
     this.view.relation.renderRelationList(relations);
     this.view.relation.renderRelationDropdownList(relations);
   }
@@ -169,10 +188,12 @@ class Controller {
   /**
    * Initializing the modals.
    */
-  async initModal() {
-    this.view.modal.addEventCancelModal();
+  initModal = async () => {
     this.view.modal.addEventSubmission(this.saveContact);
     this.view.modal.addEventDeleteConfirmed(this.deleteContact);
+    this.view.modal.addEventCancelModal();
+    this.view.modal.addEventCancelConfirmed();
+    this.view.modal.addEventClickOutside();
   }
 
 }
