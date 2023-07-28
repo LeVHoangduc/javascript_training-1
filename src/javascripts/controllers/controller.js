@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import handleError from '../helpers/errorHandler';
 import { ERROR_MESSAGE } from '../constants/constants';
 class Controller {
   /**
@@ -34,8 +33,6 @@ class Controller {
     };
     this.loadListContacts();
     this.showInfo();
-    this.view.contact.addEventEditContact(this.editContact);
-    this.view.contact.addEventDeleteContact(this.confirmDelete);
     this.view.contact.addEventAddContact(this.addContact);
     this.view.contact.addDelegateShowInfo(this.showInfo);
     this.view.contact.addEventSearchContact(this.filterContact);

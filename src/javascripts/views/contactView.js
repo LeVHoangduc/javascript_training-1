@@ -10,17 +10,6 @@ class ContactView {
         this.searchInputEl = document.querySelector(".features__search__input");
         this.filterBtnEl = document.querySelector(".features__filter > button");
         this.filterDropDown = document.querySelector(".relation-dropdown");
-
-        this.infoAvatarEl = this.infoEl.querySelector(".info__head__avatar > img");
-        this.infoNameEl = this.infoEl.querySelector(".info__head__name");
-        this.infoRelationEl = this.infoEl.querySelector(".info__head__relation");
-        this.infoPhoneEl = this.infoEl.querySelector(".detail__phone");
-        this.infoPhoneIconEl = this.infoEl.querySelector(".detail__line--phone > .detail__right");
-        this.infoEmailEl = this.infoEl.querySelector(".detail__email");
-        this.infoEmailIconEl = this.infoEl.querySelector(".detail__line--email > .detail__right");
-        this.infoGrpBtnEl = this.infoEl.querySelector(".info__buttons");
-        this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
-        this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
     }
 
     contactEl = ".contact-item";
@@ -58,18 +47,15 @@ class ContactView {
      * Render contact infomation.
      * @param {Object} contactInfo 
      */
-    renderContactInfo = (contactInfo) => {
+    renderContactInfo = (contactInfo, confirmDelete, editContact) => {
         if (contactInfo) {
-            this.infoAvatarEl.setAttribute("src", contactInfo.avatar);
-            this.infoNameEl.innerText = `${contactInfo.name}`;
-            this.infoRelationEl.innerText = `${contactInfo.relation.name}`;
-            this.infoPhoneEl.innerText = `${contactInfo.phone}`;
-            this.infoPhoneEl.setAttribute("href", `tel:${contactInfo.phone}`);
-            this.infoPhoneIconEl.setAttribute("href", `tel:${contactInfo.phone}`);
-            this.infoEmailEl.innerText = `${contactInfo.email}`;
-            this.infoEmailEl.setAttribute("href", `mailto:${contactInfo.email}`);
-            this.infoEmailIconEl.setAttribute("href", `mailto:${contactInfo.email}`);
-            this.infoGrpBtnEl.setAttribute("data-id", contactInfo.id);
+            this.infoEl.innerHTML = Template.renderContactInfo(contactInfo);
+            this.deleteBtnEl = this.infoEl.querySelector(".info__button__delete");
+            this.editBtnEl = this.infoEl.querySelector(".info__button__edit");
+            this.addEventDeleteContact(this.deleteBtnEl, confirmDelete);
+            this.addEventEditContact(this.editBtnEl, editContact);
+        } else {
+            this.infoEl.innerHTML = "";
         }
     }
 
@@ -105,8 +91,8 @@ class ContactView {
      * Add event listener deleting a contact action to the delete contact button.
      * @param {Function} confirmDelete 
      */
-    addEventDeleteContact = (confirmDelete) => {
-        this.deleteBtnEl.addEventListener("click", (event) => {
+    addEventDeleteContact = (el, confirmDelete) => {
+        el.addEventListener("click", (event) => {
             const contactId = event.target.parentNode.getAttribute("data-id");
             confirmDelete(contactId);
         })
@@ -116,8 +102,8 @@ class ContactView {
      * Add event listener editing a contact action to the edit contact button.
      * @param {Function} editContact 
      */
-    addEventEditContact = (editContact) => {
-        this.editBtnEl.addEventListener("click", (event) => {
+    addEventEditContact = (el, editContact) => {
+        el.addEventListener("click", (event) => {
             const contactId = event.target.parentNode.getAttribute("data-id");
             editContact(contactId);
         })

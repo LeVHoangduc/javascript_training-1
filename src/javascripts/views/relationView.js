@@ -36,7 +36,7 @@ class RelationView {
      * @param {Object} relation 
      */
     renderRelation = (relation) => {
-        const relationTemplate = Template.relation(relation);
+        const relationTemplate = Template.renderRelation(relation);
         this.relationListEl.innerHTML += relationTemplate;
     }
 
@@ -45,7 +45,7 @@ class RelationView {
      * @param {Object} relation 
      */
     renderRelationDropdown = (relation) => {
-        const relationDropDownTemplate = Template.relationDropDown(relation);
+        const relationDropDownTemplate = Template.renderRelationDropDown(relation);
         this.relationDropDownEl.innerHTML += relationDropDownTemplate;
     }
 }
