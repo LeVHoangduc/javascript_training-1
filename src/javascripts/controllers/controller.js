@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import handleError from '../helpers/errorHandler';
+import { ERROR_MESSAGE } from '../constants/constants';
 class Controller {
   /**
    * Constructor of Controller object
@@ -26,7 +27,7 @@ class Controller {
    * Initializing the contact list and contact information.
    */
   initContacts = async () => {
-    await handleError(this.model.contact.init(), "Couldn't initialize contact list");
+    await handleError(this.model.contact.init(), ERROR_MESSAGE.INIT_CONTACT_LIST);
     this.loadListContacts();
     this.showInfo();
     this.view.contact.addEventEditContact(this.editContact);
@@ -45,7 +46,7 @@ class Controller {
     this.model.contact.initDisplayList(this.model.relation.getRelationById);
     this.model.contact.filterDisplayList(this.view.contact.filterParams);
     const contacts = this.model.contact.getContactDisplayList();
-    handleError(this.view.contact.renderContactList(contacts), "Couldn't render contact list")
+    handleError(this.view.contact.renderContactList(contacts), MESSAGE_ERROR.RENDER_CONTACT_LIST);
   }
 
   /**
@@ -56,7 +57,7 @@ class Controller {
     if (contactId) this.model.contact.setContactInfo(contactId);
     const contactInfo = this.model.contact.getContactInfo();
     if (contactInfo) {
-      handleError(this.view.contact.renderContactInfo(contactInfo), "Couldn't render contact info");
+      handleError(this.view.contact.renderContactInfo(contactInfo), MESSAGE_ERROR.RENDER_CONTACT_INFO);
     }
   }
 
@@ -66,14 +67,14 @@ class Controller {
    */
   confirmDelete = async (contactId) => {
     const contact = await handleError(this.model.contact.getContactById(contactId, this.model.relation.getRelationById), "Couldn't get contact information");
-    handleError(this.view.modal.openConfirmModal(contact), "Couldn't open confirm modal");
+    handleError(this.view.modal.openConfirmModal(contact), MESSAGE_ERROR.OPEN_CONFIRM_MODAL);
   }
 
   /**
    * Show a modal when click add contact.
    */
   addContact = () => {
-    handleError(this.view.modal.openModal(), "Couldn't open add modal");
+    handleError(this.view.modal.openModal(), MESSAGE_ERROR.OPEN_ADD_MODAL);
   }
 
   /**
@@ -81,7 +82,7 @@ class Controller {
    * @param {String} contactId 
    */
   deleteContact = async (contactId) => {
-    await handleError(this.model.contact.deleteContactById(contactId), "Couldn't delete contact");
+    await handleError(this.model.contact.deleteContactById(contactId), MESSAGE_ERROR.DELETE_CONTACT);
     this.loadListContacts();
     this.showInfo();
   }
@@ -92,7 +93,7 @@ class Controller {
    */
   editContact = async (contactId) => {
     const contact = await handleError(this.model.contact.getContactById(contactId, this.model.relation.getRelationById), "Couldn't get contact information");
-    handleError(this.view.modal.openModal(contactId, contact), "Couldn't open edit modal");
+    handleError(this.view.modal.openModal(contactId, contact), MESSAGE_ERROR.OPEN_EDIT_MODAL);
   }
 
   /**
@@ -117,9 +118,9 @@ class Controller {
         email: contact.email,
         avatar: contact.avatar,
       }
-      await handleError(this.model.contact.addContact(contact), "Couldn't add contact");
+      await handleError(this.model.contact.addContact(contact), MESSAGE_ERROR.ADD_CONTACT);
     } else {
-      await handleError(this.model.contact.editContact(contact), "Couldn't edit contact");
+      await handleError(this.model.contact.editContact(contact), MESSENGER_ERROR.EDIT_CONTACT);
     }
     this.loadListContacts();
     this.showInfo(contact.id);
@@ -131,7 +132,7 @@ class Controller {
    * Initializing the relation lists.
    */
   initRelations = async () => {
-    await handleError(this.model.relation.init(), "Couldn't initialize relation list")
+    await handleError(this.model.relation.init(), MESSAGE_ERROR.INIT_RELATION_LIST)
     const relations = this.model.relation.getRelations();
     this.view.relation.renderRelationList(relations);
     this.view.relation.renderRelationDropdownList(relations);
