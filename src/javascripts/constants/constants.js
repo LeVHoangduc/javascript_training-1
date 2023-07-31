@@ -1,3 +1,6 @@
+/**
+ * Message for the form validator.
+ */
 export const MESSAGE = {
     NAME_REQUIRED: 'The contact name is required',
     INVALID_NAME: 'The contact name is invalid',
@@ -10,6 +13,9 @@ export const MESSAGE = {
     CONFIRM_MESSAGE: 'Do you want to delete contact: ',
 }
 
+/**
+ * Message for alert the error while fetching or rendering.
+ */
 export const ERROR_MESSAGE = {
     INIT_CONTACT_LIST: "Couldn't initialize contact list",
     INIT_RELATION_LIST: "Couldn't initialize relation list",
@@ -24,6 +30,18 @@ export const ERROR_MESSAGE = {
     EDIT_CONTACT: "Couldn't edit contact",
 }
 
+/**
+ * Message for alert if the action be done successfully.
+ */
+export const SUCCESS_MESSAGE = {
+    ADD_CONTACT: "Add contact successfully",
+    EDIT_CONTACT: "Edit contact successfully",
+    DELETE_CONTACT: "Delete contact successfully",
+}
+
+/**
+ * Regex for form validator.
+ */
 export const REGEX = {
     NAME: /^[a-zA-Z\s]+$/,
     PHONE: /^\d{10}$/,

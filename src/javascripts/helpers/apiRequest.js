@@ -1,26 +1,57 @@
 class ApiRequest {
-
+    /**
+     * Constructor function for ApiRequest object.
+     * @param {String} baseUrl 
+     * @param {String} path 
+     */
     constructor(baseUrl, path) {
         this.baseUrl = baseUrl;
         this.path = path;
     }
 
+    /**
+     * Send GET HTTP request.
+     * @param {String} id(optional)
+     * @return {Object|Array} response from server.
+     */
     get = (id) => {
         return this.sendRequest(`${this.path}${id ? `/${id}` : ''}`, 'GET');
     }
 
+    /**
+     * Send POST HTTP request.
+     * @param {Object} data 
+     * @returns {Object} response from server.
+     */
     post = (data) => {
         return this.sendRequest(`${this.path}`, 'POST', data);
     }
 
+    /**
+     * Send PUT HTTP request.
+     * @param {String} id 
+     * @param {Object} data 
+     * @returns {Object} response from server.
+     */
     put = (id, data) => {
         return this.sendRequest(`${this.path}/${id}`, 'PUT', data);
     }
 
+    /**
+     * Send PATCH HTTP request.
+     * @param {String} id 
+     * @param {Object} data 
+     * @returns {Object} response from server.
+     */
     patch = (id, data) => {
         return this.sendRequest(`${this.path}/${id}`, 'PATCH', data);
     }
 
+    /**
+     * Send DELETE HTTP request.
+     * @param {String} id 
+     * @returns @returns {Object} response from server.
+     */
     delete = (id) => {
         return this.sendRequest(`${this.path}/${id}`, 'DELETE');
     }
@@ -49,7 +80,6 @@ class ApiRequest {
         } catch (error) {
             throw error;
         }
-
     }
 }
 
