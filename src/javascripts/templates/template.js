@@ -1,4 +1,5 @@
 class Template {
+
     /**
      * Constructor of Template object.
      */

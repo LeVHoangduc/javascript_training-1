@@ -2,6 +2,7 @@ import RelationService from "../services/relationService";
 import Relation from "./relation";
 
 class Relations {
+
   /**
    * Constructor of Relations object.
    */

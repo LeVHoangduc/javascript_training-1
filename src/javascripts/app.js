@@ -3,6 +3,7 @@ import View from "./views/view";
 import Controller from "./controllers/controller";
 
 export class App {
+
     /**
      * Constructor off App object
      */

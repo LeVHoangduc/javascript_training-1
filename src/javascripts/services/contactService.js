@@ -2,6 +2,7 @@ import { API_GATEWAY_URL } from "../constants/urls";
 import ApiRequest from "../helpers/apiRequest";
 
 class ContactService {
+
   /**
    * Constructor of Contact Service object.
    */

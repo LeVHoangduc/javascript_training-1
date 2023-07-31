@@ -1,6 +1,7 @@
-import Template from "../templates/template";
+import wait from "../helpers/wait";
 
 class SnackbarView {
+
     /**
      * Constructor function for SnackbarView object.
      */
@@ -15,18 +16,18 @@ class SnackbarView {
      * Display the snackbar.
      * @param {String} message 
      */
-    showSnackbar = (type, message) => {
-        this.snackbarEl.classList.add(`${type === "success" ? "snackbar--success" : "snackbar--warning"}`);
+    showSnackbar = async (type, message) => {
+        this.snackbarEl.classList.add(`snackbar--${type}`);
         this.snackbarMsgEl.innerText = message;
-        setTimeout(() => {
-            this.snackbarEl.classList.add("snackbar--show");
-        }, 10);
-        setTimeout(() => {
-            this.snackbarEl.classList.remove("snackbar--show");
-            setTimeout(() => {
-                this.snackbarEl.innerHTML = ""
-            }, 300);
-        }, 3000);
+
+        await wait(10);
+        this.snackbarEl.classList.add("snackbar--show");
+
+        await wait(3000);
+        this.snackbarEl.classList.remove("snackbar--show");
+
+        await wait(300);
+        this.snackbarEl.innerHTML = "";
     }
 }
 

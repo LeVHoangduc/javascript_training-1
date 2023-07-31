@@ -1,5 +1,6 @@
 import Template from "../templates/template";
 class ContactView {
+
     /**
      * Constructor of ContactView object
      */

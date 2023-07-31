@@ -1,4 +1,5 @@
 class ApiRequest {
+
     /**
      * Constructor function for ApiRequest object.
      * @param {String} baseUrl 
@@ -64,21 +65,17 @@ class ApiRequest {
      */
     sendRequest = async (path, method, body) => {
         const url = `${this.baseUrl}${path}`;
-        try {
-            const response = await fetch(url, {
-                method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body)
-            });
-            if (response.ok) {
-                return await response.json();
-            } else {
-                throw new Error('Error while sending request');
-            }
-        } catch (error) {
-            throw error;
+        const response = await fetch(url, {
+            method,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        });
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error('Error while sending request');
         }
     }
 }

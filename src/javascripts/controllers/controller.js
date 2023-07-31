@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/constants';
 class Controller {
+
   /**
    * Constructor of Controller object
    * @param {Object} model

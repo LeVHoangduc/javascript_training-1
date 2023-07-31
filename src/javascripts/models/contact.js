@@ -1,4 +1,5 @@
 class Contact {
+
   /**
    * Constructor of Contact object
    * @param {Object} data

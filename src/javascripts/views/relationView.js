@@ -1,6 +1,7 @@
 import Template from "../templates/template";
 
 class RelationView {
+
     /**
      * Constructor of RelationView object
      */
