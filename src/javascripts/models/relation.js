@@ -1,4 +1,5 @@
 class Relation {
+
   /**
    * Constructor of Relation object
    * @param {Object} data

@@ -1,6 +1,7 @@
 import ContactView from "./contactView";
 import RelationView from "./relationView";
 import ModalView from "./modalView";
+import SnackbarView from "./snackbarView";
 
 class View {
     /**
@@ -10,6 +11,7 @@ class View {
         this.contact = new ContactView;
         this.relation = new RelationView;
         this.modal = new ModalView;
+        this.snackbar = new SnackbarView;
     }
 }
 

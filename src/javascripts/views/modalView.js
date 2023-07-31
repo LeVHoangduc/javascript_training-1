@@ -1,6 +1,7 @@
 import formValidator from "../helpers/formValidator";
 import { MESSAGE } from "../constants/constants";
 class ModalView {
+
     /**
      * Constructor of ModalView object.
      */

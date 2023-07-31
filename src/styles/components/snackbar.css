@@ -1,0 +1,42 @@
+.snackbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  opacity: 0;
+  visibility: hidden;
+  padding: 8px 18px;
+  border-radius: 16px;
+
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  transition: opacity 0.3s ease-in-out;
+}
+
+.snackbar--success {
+  background-color: var(--primary-color);
+}
+
+.snackbar--success .snackbar__icon {
+  width: 36px;
+  height: 36px;
+  background-image: url('../../assets/icons/check-icon.svg');
+}
+
+.snackbar--warning {
+  background-color: var(--warning-color);
+}
+
+.snackbar--warning .snackbar__icon {
+  width: 36px;
+  height: 36px;
+  background-image: url('../../assets/icons/error-icon.svg');
+}
+
+.snackbar--show {
+  opacity: 1;
+  visibility: visible;
+}

@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ERROR_MESSAGE } from '../constants/constants';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/constants';
 class Controller {
+
   /**
    * Constructor of Controller object
    * @param {Object} model
@@ -29,7 +30,7 @@ class Controller {
     try {
       await this.model.contact.init();
     } catch {
-      alert(ERROR_MESSAGE.INIT_CONTACT_LIST);
+      this.displaySnackbar("warning", ERROR_MESSAGE.INIT_CONTACT_LIST);
     };
     this.loadListContacts();
     this.showInfo();
@@ -50,7 +51,7 @@ class Controller {
     try {
       this.view.contact.renderContactList(contacts);
     } catch {
-      alert(ERROR_MESSAGE.RENDER_CONTACT_LIST);
+      this.displaySnackbar('warning', ERROR_MESSAGE.RENDER_CONTACT_LIST);
     }
   }
 
@@ -64,7 +65,7 @@ class Controller {
     try {
       this.view.contact.renderContactInfo(contactInfo, this.confirmDelete, this.editContact);
     } catch {
-      alert(ERROR_MESSAGE.RENDER_CONTACT_INFO);
+      this.displaySnackbar('warning', ERROR_MESSAGE.RENDER_CONTACT_INFO);
     }
   }
 
@@ -77,12 +78,12 @@ class Controller {
     try {
       contact = await this.model.contact.getContactById(contactId, this.model.relation.getRelationById);
     } catch {
-      alert(ERROR_MESSAGE.GET_CONTACT_INFO)
+      this.displaySnackbar('warning', ERROR_MESSAGE.GET_CONTACT_INFO)
     }
     try {
       this.view.modal.openConfirmModal(contact);
     } catch {
-      alert(ERROR_MESSAGE.OPEN_CONFIRM_MODAL);
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_CONFIRM_MODAL);
     }
   }
 
@@ -93,7 +94,7 @@ class Controller {
     try {
       this.view.modal.openModal();
     } catch {
-      alert(ERROR_MESSAGE.OPEN_ADD_MODAL);
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_ADD_MODAL);
     }
   }
 
@@ -104,8 +105,9 @@ class Controller {
   deleteContact = async (contactId) => {
     try {
       await this.model.contact.deleteContactById(contactId);
+      this.displaySnackbar('success', SUCCESS_MESSAGE.DELETE_CONTACT);
     } catch {
-      alert(ERROR_MESSAGE.DELETE_CONTACT);
+      this.displaySnackbar('warning', ERROR_MESSAGE.DELETE_CONTACT);
     }
     this.loadListContacts();
     this.showInfo();
@@ -120,12 +122,12 @@ class Controller {
     try {
       contact = await this.model.contact.getContactById(contactId, this.model.relation.getRelationById)
     } catch {
-      alert(ERROR_MESSAGE.GET_CONTACT_INFO);
+      this.displaySnackbar('warning', ERROR_MESSAGE.GET_CONTACT_INFO);
     }
     try {
       this.view.modal.openModal(contactId, contact)
     } catch {
-      alert(ERROR_MESSAGE.OPEN_EDIT_MODAL);
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_EDIT_MODAL);
     }
   }
 
@@ -153,14 +155,16 @@ class Controller {
       }
       try {
         await this.model.contact.addContact(contact);
+        this.displaySnackbar('success', SUCCESS_MESSAGE.ADD_CONTACT);
       } catch {
-        alert(ERROR_MESSAGE.ADD_CONTACT)
+        this.displaySnackbar('warning', ERROR_MESSAGE.ADD_CONTACT);
       }
     } else {
       try {
-        await this.model.contact.editContact(contact)
+        await this.model.contact.editContact(contact);
+        this.displaySnackbar('success', SUCCESS_MESSAGE.EDIT_CONTACT);
       } catch {
-        alert(ERROR_MESSAGE.EDIT_CONTACT)
+        this.displaySnackbar('warning', ERROR_MESSAGE.EDIT_CONTACT);
       }
     }
     this.loadListContacts();
@@ -176,7 +180,7 @@ class Controller {
     try {
       await this.model.relation.init();
     } catch {
-      alert(ERROR_MESSAGE.INIT_RELATION_LIST);
+      this.displaySnackbar('warning', ERROR_MESSAGE.INIT_RELATION_LIST);
     };
     const relations = this.model.relation.getRelations();
     this.view.relation.renderRelationList(relations);
@@ -196,6 +200,16 @@ class Controller {
     this.view.modal.addEventClickOutside();
   }
 
+  //----- SNACKBAR CONTROLLER -----//
+
+  /**
+   * Display the snackbar on top of the window.
+   * @param {String} type 
+   * @param {String} message 
+   */
+  displaySnackbar = (type, message) => {
+    this.view.snackbar.showSnackbar(type, message);
+  }
 }
 
 export default Controller;

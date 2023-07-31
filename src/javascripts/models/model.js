@@ -2,6 +2,7 @@ import Contacts from "./contacts";
 import Relations from "./relations";
 
 class Model {
+
   /**
    * Constructor of Model object
    */

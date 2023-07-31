@@ -2,6 +2,7 @@ import ContactService from "../services/contactService";
 import Contact from "./contact"
 
 class Contacts {
+
   /**
    * Constructor of Contacts object.
    */

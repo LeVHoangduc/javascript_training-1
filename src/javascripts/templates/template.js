@@ -1,12 +1,14 @@
 class Template {
+
     /**
-     * Constructor of Template object
+     * Constructor of Template object.
      */
     constructor() { }
 
     /**
-     * HTML Template for render an Contact object
+     * HTML Template for render an Contact object.
      * @param {Object} contact
+     * @returns {HTMLElement} Template for rendering contact list row.
      */
     static renderContact = (contact) => `
         <li class="contact-item row" data-id="${contact.id}">
@@ -22,6 +24,11 @@ class Template {
         </li>
     `;
 
+    /**
+     * HTML template for rendering Contact information.
+     * @param {Object} contact 
+     * @returns {HTMLElement} HTML element for displaying contact information.
+     */
     static renderContactInfo = (contact) => `
         <div class="info__head">
         <div class="info__head__avatar">
@@ -84,6 +91,7 @@ class Template {
     /**
      * HTML Template for the relation list in modal.
      * @param {Object} relation
+     * @returns {HTMLElement} HTML element for displaying relation in relation list in adding, editing form.
      */
     static renderRelation = (relation) => `
         <option value="${relation.id}">${relation.name}</option>
@@ -92,6 +100,7 @@ class Template {
     /**
      * HTML Template for the relation list filter's dropdown.
      * @param {Object} relation
+     * @returns {HTMLElement} HTML element for displaying relation in filter options.
      */
     static renderRelationDropDown = (relation) => `  
         <input type="radio" id="${relation.id}" name="filter_option" value="${relation.id}">     
