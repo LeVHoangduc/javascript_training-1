@@ -51,7 +51,7 @@ class Controller {
     try {
       this.view.contact.renderContactList(contacts);
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.RENDER_CONTACT_LIST);
+      this.displaySnackbar('warning', ERROR_MESSAGE.RENDER_CONTACT_LIST);
     }
   }
 
@@ -65,7 +65,7 @@ class Controller {
     try {
       this.view.contact.renderContactInfo(contactInfo, this.confirmDelete, this.editContact);
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.RENDER_CONTACT_INFO);
+      this.displaySnackbar('warning', ERROR_MESSAGE.RENDER_CONTACT_INFO);
     }
   }
 
@@ -78,12 +78,12 @@ class Controller {
     try {
       contact = await this.model.contact.getContactById(contactId, this.model.relation.getRelationById);
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.GET_CONTACT_INFO)
+      this.displaySnackbar('warning', ERROR_MESSAGE.GET_CONTACT_INFO)
     }
     try {
       this.view.modal.openConfirmModal(contact);
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.OPEN_CONFIRM_MODAL);
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_CONFIRM_MODAL);
     }
   }
 
@@ -94,7 +94,7 @@ class Controller {
     try {
       this.view.modal.openModal();
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.OPEN_ADD_MODAL);
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_ADD_MODAL);
     }
   }
 
@@ -105,9 +105,9 @@ class Controller {
   deleteContact = async (contactId) => {
     try {
       await this.model.contact.deleteContactById(contactId);
-      this.displaySnackbar("success", SUCCESS_MESSAGE.DELETE_CONTACT);
+      this.displaySnackbar('success', SUCCESS_MESSAGE.DELETE_CONTACT);
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.DELETE_CONTACT);
+      this.displaySnackbar('warning', ERROR_MESSAGE.DELETE_CONTACT);
     }
     this.loadListContacts();
     this.showInfo();
@@ -122,12 +122,12 @@ class Controller {
     try {
       contact = await this.model.contact.getContactById(contactId, this.model.relation.getRelationById)
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.GET_CONTACT_INFO);
+      this.displaySnackbar('warning', ERROR_MESSAGE.GET_CONTACT_INFO);
     }
     try {
       this.view.modal.openModal(contactId, contact)
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.OPEN_EDIT_MODAL);
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_EDIT_MODAL);
     }
   }
 
@@ -155,16 +155,16 @@ class Controller {
       }
       try {
         await this.model.contact.addContact(contact);
-        this.displaySnackbar("success", SUCCESS_MESSAGE.ADD_CONTACT);
+        this.displaySnackbar('success', SUCCESS_MESSAGE.ADD_CONTACT);
       } catch {
-        this.displaySnackbar("warning", ERROR_MESSAGE.ADD_CONTACT);
+        this.displaySnackbar('warning', ERROR_MESSAGE.ADD_CONTACT);
       }
     } else {
       try {
         await this.model.contact.editContact(contact);
-        this.displaySnackbar("success", SUCCESS_MESSAGE.EDIT_CONTACT);
+        this.displaySnackbar('success', SUCCESS_MESSAGE.EDIT_CONTACT);
       } catch {
-        this.displaySnackbar("warning", ERROR_MESSAGE.EDIT_CONTACT);
+        this.displaySnackbar('warning', ERROR_MESSAGE.EDIT_CONTACT);
       }
     }
     this.loadListContacts();
@@ -180,7 +180,7 @@ class Controller {
     try {
       await this.model.relation.init();
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.INIT_RELATION_LIST);
+      this.displaySnackbar('warning', ERROR_MESSAGE.INIT_RELATION_LIST);
     };
     const relations = this.model.relation.getRelations();
     this.view.relation.renderRelationList(relations);
