@@ -25,9 +25,6 @@ class SnackbarView {
 
         await wait(3000);
         this.snackbarEl.classList.remove("snackbar--show");
-
-        await wait(300);
-        this.snackbarEl.innerHTML = "";
     }
 }
 
