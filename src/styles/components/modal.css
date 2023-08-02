@@ -8,15 +8,13 @@
 
   width: 80%;
   max-width: 968px;
-  height: 95%;
-  max-height: 797px;
   border-radius: 30px;
 
   background-color: var(--bg-light-color);
 
-  padding: 52px;
+  padding: 45px;
 
-  scale: 0.9;
+  scale: 0.8;
 }
 
 .modal--active {
@@ -39,7 +37,7 @@
   column-gap: 55px;
   row-gap: 45px;
 
-  margin: 67px 0 86px;
+  margin: 50px 0 50px;
 }
 
 .modal__inputs__field {
