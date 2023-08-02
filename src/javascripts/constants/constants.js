@@ -48,3 +48,10 @@ export const REGEX = {
     EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     AVATAR: /\.(jpeg|jpg|png|gif|bmp|svg)$/i,
 }
+
+/**
+ * Optinal API query for fetching data from json-server
+ */
+export const QUERY = {
+    EXPAND_RELATION: "?_expand=relation"
+}

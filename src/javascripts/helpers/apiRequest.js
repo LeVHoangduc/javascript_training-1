@@ -13,10 +13,11 @@ class ApiRequest {
     /**
      * Send GET HTTP request.
      * @param {String} id(optional)
+     * @param {String} query
      * @return {Object|Array} response from server.
      */
-    get = (id) => {
-        return this.sendRequest(`${this.path}${id ? `/${id}` : ''}`, 'GET');
+    get = (id, query) => {
+        return this.sendRequest(`${this.path}${id ? `/${id}/` : ''}${query ? query : ''}`, 'GET');
     }
 
     /**
@@ -44,7 +45,7 @@ class ApiRequest {
      * @param {Object} data 
      * @returns {Object} response from server.
      */
-    patch = (id, data) => {
+    patch = (id, data, query) => {
         return this.sendRequest(`${this.path}/${id}`, 'PATCH', data);
     }
 

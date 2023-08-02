@@ -81,7 +81,7 @@ class ModalView {
             const contact = {
                 id: this.modalEl.getAttribute("data-id"),
                 name: this.modalEl.name.value,
-                relation: this.modalEl.relation.value,
+                relationId: this.modalEl.relation.value,
                 phone: this.modalEl.phone.value,
                 email: this.modalEl.email.value,
                 avatar: this.modalEl.avatar.value,
