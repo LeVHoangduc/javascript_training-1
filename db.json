@@ -1,0 +1,66 @@
+{
+  "contacts": [
+    {
+      "id": "0e4813ba-6617-4b6c-97b0-7af30340e2e6",
+      "name": "Ngo Hong Hoang",
+      "relationId": "1",
+      "phone": "0935487037",
+      "email": "honghoangngo@gmail.com",
+      "avatar": "https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg"
+    },
+    {
+      "id": "4b9b59bb-9f80-47e1-959d-6b454bff9726",
+      "name": "Le vu Hoang Duc",
+      "relationId": "2",
+      "phone": "0903589994",
+      "email": "namvuongtranphu@gmail.com",
+      "avatar": "https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien-600x600.jpg"
+    },
+    {
+      "id": "0c6831b2-517b-401b-a21a-461a1022ce48",
+      "name": "Nguyen Thanh Liem",
+      "relationId": "2",
+      "phone": "0935475369",
+      "email": "Nova.Wolf15@yahoo.com",
+      "avatar": "https://vanhoadoisong.vn/wp-content/uploads/2022/08/tong-hop-100-avatar-dep-cute-de-thuong-cho-cac-cap-doi-08.jpg"
+    },
+    {
+      "id": "77616b08-091a-4346-9567-5961dae5c78b",
+      "name": "Nguyen Huu Thuan",
+      "relationId": "1",
+      "phone": "0128765442",
+      "email": "Mario_Bosco77@gmail.com",
+      "avatar": "https://www.hdgame.vn/wp-content/uploads/2022/09/hinh-ff-cute-2.jpg"
+    },
+    {
+      "id": "d067da70-aa72-4d93-884b-b3be57c3eb0f",
+      "name": "Hoang Phuong Le",
+      "relationId": "3",
+      "phone": "7275176874",
+      "email": "Icie.Howell@hotmail.com",
+      "avatar": "https://hapotravel.com/wp-content/uploads/2023/03/suu-tam-25-hinh-anh-cute-avatar-dep-nhat-cho-ban-thoa-suc-lua-chon_1.jpg"
+    },
+    {
+      "id": "ceccf43c-0126-46e9-ad07-b758be14350f",
+      "name": "Le Thi Hoai Luong",
+      "relationId": "1",
+      "phone": "0903589789",
+      "email": "biroro@gmail.com",
+      "avatar": "https://i.pinimg.com/564x/f9/ec/ee/f9eceec88636932c381a60f218a13854.jpg"
+    }
+  ],
+  "relations": [
+    {
+      "id": "1",
+      "name": "f6"
+    },
+    {
+      "id": "2",
+      "name": "f-camping"
+    },
+    {
+      "id": "3",
+      "name": "pfiev"
+    }
+  ]
+}
