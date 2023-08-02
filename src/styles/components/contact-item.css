@@ -34,3 +34,7 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.contact-item__phone {
+  margin: 0 20px;
+}
