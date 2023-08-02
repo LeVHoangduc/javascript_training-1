@@ -1,4 +1,4 @@
 /**
  * API gateway url
  */
-export const API_GATEWAY_URL = "https://wide-eyed-crab-waders.cyclic.cloud";
+export const API_GATEWAY_URL = "https://javascript-rs4y.onrender.com";
