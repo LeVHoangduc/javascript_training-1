@@ -52,15 +52,19 @@
   "relations": [
     {
       "id": "1",
-      "name": "f6"
+      "name": "family"
     },
     {
       "id": "2",
-      "name": "f-camping"
+      "name": "friend"
     },
     {
       "id": "3",
-      "name": "pfiev"
+      "name": "colleague"
+    },
+    {
+      "id": "4",
+      "name": "f-camping"
     }
   ]
 }
