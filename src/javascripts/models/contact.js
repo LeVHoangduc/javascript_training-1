@@ -7,6 +7,7 @@ class Contact {
   constructor(data) {
     this.id = data.id;
     this.name = data.name;
+    this.relationId = data.relationId;
     this.relation = data.relation;
     this.phone = data.phone;
     this.email = data.email;

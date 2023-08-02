@@ -10,7 +10,6 @@ class Contacts {
     this.service = new ContactService();
 
     this.contactList; // List of contacts.
-    this.contactDisplayList; // List of contact for displaying.
     this.contactInfo; // Contact information for displaying.
   }
 
@@ -20,6 +19,7 @@ class Contacts {
   init = async () => {
     const data = await this.service.getContactList();
     this.contactList = this.parseData(data);
+    this.contactInfo = this.contactList[0];
   }
 
   /**
@@ -32,21 +32,10 @@ class Contacts {
   }
 
   /**
-   * Initializing the Display list.
-   * @param {String} getRelationById 
+   * Getters and Setters.
    */
-  initDisplayList = (getRelationById) => {
-    this.contactDisplayList = this.contactList.map((contact) => {
-      return { ...contact, relation: getRelationById(contact.relation) }
-    })
-    this.contactInfo = this.contactDisplayList[0];
-  }
-
-  /**
-   * Getter and Setter.
-   */
-  getContactDisplayList = () => {
-    return this.contactDisplayList;
+  getContactList = () => {
+    return this.contactList;
   }
 
   getContactInfo = () => {
@@ -54,7 +43,7 @@ class Contacts {
   }
 
   setContactInfo = (id) => {
-    const data = this.contactDisplayList.find(contact => contact.id === id);
+    const data = this.contactList.find(contact => contact.id === id);
     this.contactInfo = new Contact(data);
   }
 
@@ -63,9 +52,9 @@ class Contacts {
    * @param {String} id 
    * @returns {Object} contact information object.
    */
-  getContactById = async (id, getRelationById) => {
+  getContactById = async (id) => {
     const data = await this.service.getContactById(id);
-    this.contactInfo = new Contact({ ...data, relation: getRelationById(data.relation) });
+    this.contactInfo = new Contact(data);
     return this.contactInfo;
   }
 
@@ -73,22 +62,28 @@ class Contacts {
    * Add contact to contact list and database.
    * @param {Object} data 
    */
-  addContact = async (data) => {
-    const contact = new Contact(data);
-    this.contactList.push(contact);
+  addContact = async (data, getRelationById) => {
+    console.log(data);
+    let contact = new Contact(data);
     await this.service.addContact(contact);
+    contact = { ...contact, relation: getRelationById(contact.relationId) }
+    this.contactList.push(contact);
+    console.log(this.contactList);
+    this.contactInfo = contact;
   }
 
   /**
    * Update contact in contact list and database.
    * @param {Object} data 
    */
-  editContact = async (data) => {
-    const contact = new Contact(data);
+  editContact = async (data, getRelationById) => {
+    let contact = new Contact(data);
     await this.service.editContact(contact);
+    contact = { ...contact, relation: getRelationById(contact.relationId) };
     this.contactList = this.contactList.map((item) => {
       if (item.id === contact.id) {
-        return contact
+        this.contactInfo = contact;
+        return contact;
       }
       return item;
     })
@@ -101,16 +96,17 @@ class Contacts {
   deleteContactById = async (id) => {
     await this.service.deleteContactById(id);
     this.contactList = this.contactList.filter((item) => item.id !== id);
-    this.contactInfo = this.contactDisplayList[0];
+    this.contactInfo = this.contactList[0];
   }
 
   /**
    * Filter and search contact in contact displaying list.
    * @param {Object} params
+   * @returns {Array} result list after filter
    */
-  filterDisplayList = (params) => {
+  filterList = (params) => {
     const { filter, searchKey } = params;
-    this.contactDisplayList = this.contactDisplayList.filter((contact) => {
+    const result = this.contactList.filter((contact) => {
       let isMatchFilter = true;
       let isMatchSearch = true;
       // Match with filter
@@ -124,7 +120,8 @@ class Contacts {
       }
       return isMatchFilter && isMatchSearch;
     });
-    this.contactInfo = this.contactDisplayList[0];
+    this.contactInfo = result[0];
+    return result;
   }
 }
 

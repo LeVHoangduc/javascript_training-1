@@ -1,4 +1,5 @@
 import { API_GATEWAY_URL } from "../constants/urls";
+import { QUERY } from "../constants/constants";
 import ApiRequest from "../helpers/apiRequest";
 
 class ContactService {
@@ -15,7 +16,7 @@ class ContactService {
    * @returns {Array} Contact list
    */
   getContactList = async () => {
-    const data = await this.apiRequest.get();
+    const data = await this.apiRequest.get(null, QUERY.EXPAND_RELATION);
     return data;
   }
 
@@ -25,7 +26,7 @@ class ContactService {
    * @returns {Object} Contact object
    */
   getContactById = async (id) => {
-    const data = await this.apiRequest.get(id);
+    const data = await this.apiRequest.get(id, QUERY.EXPAND_RELATION);
     return data;
   }
 

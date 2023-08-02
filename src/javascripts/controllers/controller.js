@@ -45,9 +45,7 @@ class Controller {
    * Load and display the contact list.
    */
   loadListContacts = () => {
-    this.model.contact.initDisplayList(this.model.relation.getRelationById);
-    this.model.contact.filterDisplayList(this.view.contact.filterParams);
-    const contacts = this.model.contact.getContactDisplayList();
+    const contacts = this.model.contact.filterList(this.view.contact.filterParams);
     try {
       this.view.contact.renderContactList(contacts);
     } catch {
@@ -148,20 +146,20 @@ class Controller {
       contact = {
         id: uuidv4(),
         name: contact.name,
-        relation: contact.relation,
+        relationId: contact.relationId,
         phone: contact.phone,
         email: contact.email,
         avatar: contact.avatar,
       }
       try {
-        await this.model.contact.addContact(contact);
+        await this.model.contact.addContact(contact, this.model.relation.getRelationById);
         this.displaySnackbar('success', SUCCESS_MESSAGE.ADD_CONTACT);
       } catch {
         this.displaySnackbar('warning', ERROR_MESSAGE.ADD_CONTACT);
       }
     } else {
       try {
-        await this.model.contact.editContact(contact);
+        await this.model.contact.editContact(contact, this.model.relation.getRelationById);
         this.displaySnackbar('success', SUCCESS_MESSAGE.EDIT_CONTACT);
       } catch {
         this.displaySnackbar('warning', ERROR_MESSAGE.EDIT_CONTACT);
